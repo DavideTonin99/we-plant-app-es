@@ -1,0 +1,13 @@
+version: "3.4"
+services:
+  we_plant_app:
+    container_name: we_plant_app
+    restart: always
+    build: 
+      context: ionic
+      dockerfile: Dockerfile
+    ports:
+      - "8100:8100"
+    tty: true
+    volumes:
+      - ../:/we-plant-app:delegated

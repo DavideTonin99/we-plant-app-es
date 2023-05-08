@@ -1,0 +1,295 @@
+<!--
+  Generated template for the AlberoDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header [ngStyle]="{'display': display}">
+  <ion-navbar color="primary">
+    <ion-title *ngIf="!newAlbero">{{albero.nomeComune}}</ion-title>
+    <ion-title *ngIf="newAlbero">Nuovo albero</ion-title>
+    <button ion-button
+            icon-only
+            menuToggle
+            start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding [ngStyle]="{'display': display}">
+
+  <div class="text-center">
+    <ion-badge [color]="'danger'" *ngIf="albero.deleted">Albero eliminato</ion-badge>
+  </div>
+  <form *ngIf="!anonimusUser">
+    <ion-item *ngIf="!newAlbero">
+      <ion-label floating>Genere e specie</ion-label>
+      <ion-input type="text" [(ngModel)]="albero.essenza.genereESpecie" name="genereESpecie"
+                 [readonly]="true"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="newAlbero">
+      <ion-label floating>Seleziona genere e specie</ion-label>
+      <ion-input name="genereESpecieSelect" type="text"
+                 [(ngModel)]="searchBar"
+                 (ngModelChange)="inputChange($event)" autocomplete="off" (blur)="onSearchBlur()"
+                 [readonly]="anonimusUser">
+      </ion-input>
+    </ion-item>
+    <div *ngIf="newAlbero && searching" class="plants">
+      <ion-list>
+        <ion-item *ngFor="let essenza of essenzaSearchResult" (click)="selectedEssenza(essenza)">
+          {{essenza.genereESpecie}}
+        </ion-item>
+      </ion-list>
+    </div>
+    <ion-item>
+      <ion-label floating>Nome comune</ion-label>
+      <ion-input type="text" [(ngModel)]="albero.essenza.nomeComune" name="nomeComune"
+                 [readonly]="true">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Provenienza</ion-label>
+      <ion-input [(ngModel)]="albero.essenza.provenienza" name="provenienza" [readonly]="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Descrizione</ion-label>
+      <ion-input [(ngModel)]="albero.essenza.descrizione" name="descrizione" [readonly]="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Usi e curiosità</ion-label>
+      <ion-input [(ngModel)]="albero.essenza.usieCuriosita" name="usieCuriosita" [readonly]="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Nota</ion-label>
+      <ion-textarea [(ngModel)]="albero.nota" name="nota" [readonly]="anonimusUser"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="albero.idPianta">
+      <ion-label floating>Codice albero</ion-label>
+      <ion-input [(ngModel)]="albero.idPianta" name="idPianta"
+                 [readonly]="anonimusUser || !newAlbero && !toComplite"></ion-input>
+    </ion-item>
+    <ion-grid *ngIf="!albero.idPianta">
+      <ion-row class="lat-lon">
+        <ion-col col-9>
+          <ion-item>
+            <ion-label floating>Codice albero</ion-label>
+            <ion-input [(ngModel)]="albero.idPianta" name="idPianta"
+                       [readonly]="anonimusUser || !newAlbero && !toComplite"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-3 class="lat-lon__button">
+          <button ion-button icon-only clear (click)="scan()" color="danger">
+            Scansiona
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item>
+      <ion-label floating>Posizione</ion-label>
+      <ion-select [(ngModel)]="albero.posizione" name="posizione" [disabled]="anonimusUser">
+        <ion-option value="Isolata">Isolata</ion-option>
+        <ion-option value="Filare">Filare</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Tipo di suolo</ion-label>
+      <ion-select [(ngModel)]="albero.tipoDiSuolo" name="tipoDiSuolo" [disabled]="anonimusUser">
+        <ion-option value="AREA_VERDE">Area verde</ion-option>
+        <ion-option value="ZANELLA">Zanella</ion-option>
+        <ion-option value="AIUOLA">Aiuola</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Altezza (in metri)</ion-label>
+      <ion-input [(ngModel)]="albero.altezza" name="altezza" type="number" min="1" max="10"
+                 [readonly]="anonimusUser"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Diametro (in cm)</ion-label>
+      <ion-input [(ngModel)]="albero.diametro" name="diametro" type="number" min="1" max="10"
+                 [readonly]="anonimusUser"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!anonimusUser">
+      <ion-label floating>Data impianto</ion-label>
+      <ion-datetime [(ngModel)]="albero.dataImpianto" name="dataImpianto" type="date"
+                    [pickerOptions]="clearDataImpianto" [disabled]="anonimusUser"></ion-datetime>
+    </ion-item>
+
+    <ion-item *ngIf="!anonimusUser">
+      <ion-label floating>Data prima rilevazione</ion-label>
+      <ion-datetime [(ngModel)]="albero.dataPrimaRilevazione" name="dataPrimaRilevazione" type="date"
+                    [pickerOptions]="clearDataPrimaRilevazione" [disabled]="anonimusUser"></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf="!anonimusUser && albero.deleted">
+      <ion-label floating>Data abbattimento</ion-label>
+      <ion-datetime [(ngModel)]="albero.dataAbbattimento" name="dataAbbattimento" type="date"
+                    [pickerOptions]="clearDataAbattimento" [disabled]="anonimusUser"></ion-datetime>
+    </ion-item>
+
+    <ion-item *ngIf="!anonimusUser">
+      <ion-label floating>Note tecniche</ion-label>
+      <ion-textarea [(ngModel)]="albero.noteTecniche" name="noteTechniche" [readonly]="anonimusUser">
+      </ion-textarea>
+    </ion-item>
+    <ion-grid *ngIf="newAlbero || !anonimusUser">
+      <ion-row class="lat-lon">
+        <ion-col col-10>
+          <ion-item>
+            <ion-label floating>Latitudine</ion-label>
+            <ion-input [(ngModel)]="lat" name="lat" required="true" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-2 class="lat-lon__button">
+          <button ion-button icon-only clear (click)="getCurrentLocation()">
+            Rileva
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="lat-lon">
+        <ion-col col-10>
+          <ion-item>
+            <ion-label floating>Longitudine</ion-label>
+            <ion-input [(ngModel)]="lon" name="lon" required="true" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-2 class="lat-lon__button">
+          <button ion-button icon-only clear (click)="clearLocation()" color="danger">
+            Reset
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="!isReadOnly()" class="attach-photo">
+      <h4>Allega immagini (opzionale)</h4>
+      <ion-list>
+        <button ion-button color="primary" (click)="tackPicture()">Allega foto</button>
+      </ion-list>
+    </div>
+    <div *ngIf="images.length > 0" class="photos">
+      <div class="image-title">Immagini scelte</div>
+      <div *ngFor="let image of images; index as i" class="image-container">
+        <div>
+          <div class="plant-image"
+               [style.backgroundImage]="'url('+getThumbnailOrImage(image)+')'"
+               (click)="openGallery(i)"></div>
+        </div>
+        <div *ngIf="canDeleteImage(image)">
+          <button ion-button small class="delete-photo" (click)="deletePhoto(image)" color="danger">
+            Elimina
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div class="button__container" *ngIf="!anonimusUser">
+      <button ion-button
+              class="button--wide"
+              type="submit"
+              (click)="checkAndSave()"
+              *ngIf="!newAlbero">
+        Salva
+      </button>
+      <button ion-button
+              class="button--wide"
+              type="submit"
+              (click)="deleteAlbero()"
+              color="danger"
+              *ngIf="!newAlbero && !albero.deleted">
+        Elimina Albero
+      </button>
+      <button ion-button
+              class="button--wide"
+              type="submit"
+              (click)="checkAndSave()"
+              *ngIf="newAlbero">
+        Crea Albero
+      </button>
+      <div class="link__container" *ngIf="albero.deleted">
+        <div class="link-text"
+             (click)="recoverAlbero()"> Hai eliminato per errore <a class="link"> riabilita albero</a>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <div class="anonymous" *ngIf="anonimusUser">
+
+    <div *ngIf="images.length == 0">
+    </div>
+    <div *ngIf="images.length > 0">
+      <img [src]="images[0].url">
+    </div>
+
+    <div>
+      <b>Descrizione:</b>
+      <p *ngIf="!!albero.essenza.descrizione">{{albero.essenza.descrizione}}</p>
+      <p *ngIf="!albero.essenza.descrizione"> Al momento non è disponibile la descrizione di questa pianta</p>
+    </div>
+    <div *ngIf="!!albero.essenza.nomeComune">
+      <b>Nome comune:</b>
+      <p>{{albero.essenza.nomeComune}}</p>
+    </div>
+    <div *ngIf="!!albero.essenza.genereESpecie">
+      <b>Genere e specie:</b>
+      <p>{{albero.essenza.genereESpecie}}</p>
+    </div>
+    <div *ngIf="!!albero.nota">
+      <b>Note:</b>
+      <p>{{albero.nota}}</p>
+    </div>
+    <div *ngIf="!!albero.essenza.usieCuriosita">
+      <b>Usi e curiosità:</b>
+      <p>{{albero.essenza.usieCuriosita}}</p>
+    </div>
+    <div *ngIf="!!albero.essenza.provenienza">
+      <b>Provenienza:</b>
+      <p>{{albero.essenza.provenienza}}</p>
+    </div>
+    <div *ngIf="!!albero.altezza">
+      <b>Altezza:</b>
+      <p>{{albero.altezza}} metri</p>
+    </div>
+    <div *ngIf="!!albero.diametro">
+      <b>Diametro:</b>
+      <p>{{albero.diametro}} centimetri</p>
+    </div>
+    <div *ngIf="!!albero.posizione">
+      <b>Posizione:</b>
+      <p>{{albero.posizione}}</p>
+    </div>
+    <div *ngIf="!!albero.tipoDiSuolo">
+      <b>Tipo di suolo:</b>
+      <p>{{albero.tipoDiSuolo}}</p>
+    </div>
+    <div *ngIf="!!albero.idPianta">
+      <b>Codice albero:</b>
+      <p>{{albero.idPianta}}</p>
+    </div>
+    <div *ngIf="images.length > 0" class="photos">
+      <div class="image-title">Immagini scelte</div>
+      <div *ngFor="let image of images; index as i" class="image-container">
+        <div>
+          <div class="plant-image"
+               [style.backgroundImage]="'url('+getThumbnailOrImage(image)+')'"
+               (click)="openGallery(i)"></div>
+        </div>
+        <div *ngIf="canDeleteImage(image)">
+          <button ion-button small class="delete-photo" (click)="deletePhoto(image)" color="danger">
+            Elimina
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

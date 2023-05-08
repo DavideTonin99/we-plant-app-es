@@ -1,0 +1,40 @@
+page-login, .login-process {
+  .loading-class {
+    background: transparent;
+    box-shadow: none;
+  }
+  .logo {
+    text-align: center;
+
+    img {
+      width: 100px;
+      height: auto;
+    }
+  }
+  .title__container {
+    margin-top: 30px;
+    text-align: center;
+    .title {
+      color: color($colors, primary);
+      font-size: 2.5rem;
+    }
+  }
+  .login__form {
+    margin-top: 30px;
+  }
+  .button__container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .link__container {
+    text-align: center;
+    margin-top: 20px;
+    color: color($colors, dark3);
+    font-size: 1.0em;
+  }
+  .link-text {
+    margin-right: 5px;
+    padding: 5px;
+  }
+
+}

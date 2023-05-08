@@ -1,0 +1,3 @@
+FROM node:11.15
+WORKDIR /we-plant-app
+EXPOSE 8100

@@ -1,0 +1,58 @@
+<ion-content padding>
+
+  <h2 class="text-dark3 title">Preparazione visita al {{visitProgress.percentage}} % </h2>
+
+  <div class="visit-chart">
+    <canvas baseChart
+            [data]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            [colors]="colors"
+            [options]="options"
+            [chartType]="doughnutChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+
+  <div class="small__input__container" (click)="visitPage()">
+    <div class="checkbox-container">
+      <ion-checkbox [(ngModel)]="visitProgress.startPoint" class="checkbox" disabled="true"></ion-checkbox>
+      <span class="text-dark3 checkbox-text">Punto di partenza</span>
+    </div>
+  </div>
+  <div class="small__input__container" (click)="visitPage()">
+    <div class="checkbox-container">
+      <ion-checkbox [(ngModel)]="visitProgress.stops" class="checkbox"  disabled="true"></ion-checkbox>
+      <span class="text-dark3 checkbox-text">Luoghi che vuoi visitare</span>
+    </div>
+  </div>
+  <div class="small__input__container" (click)="visitPage()">
+    <div class="checkbox-container">
+      <ion-checkbox [(ngModel)]="visitProgress.endPoint" class="checkbox"  disabled="true"></ion-checkbox>
+      <span class="text-dark3 checkbox-text">Punto di arrivo</span>
+    </div>
+  </div>
+  <div class="small__input__container" (click)="visitPage()">
+    <div class="checkbox-container">
+      <ion-checkbox [(ngModel)]="visitProgress.difficulty" class="checkbox" disabled="true"></ion-checkbox>
+      <span class="text-dark3 checkbox-text">Livello di difficoltà</span>
+    </div>
+  </div>
+  <div class="small__input__container" (click)="visitPage()">
+    <div class="checkbox-container">
+      <ion-checkbox [(ngModel)]="visitProgress.maxTime" class="checkbox" disabled="true"></ion-checkbox>
+      <span class="text-dark3 checkbox-text">Tempo a disposizione</span>
+    </div>
+  </div>
+  <div class="small__input__container" (click)="visitPage()">
+    <div class="checkbox-container">
+      <ion-checkbox [(ngModel)]="visitProgress.maxLength" class="checkbox" disabled="true"></ion-checkbox>
+      <span class="text-dark3 checkbox-text">Lunghezza massima</span>
+    </div>
+  </div>
+
+
+
+  <div class="button-container" (click)="visitPage()">
+    <button ion-button class="nino-button">Vai alla visita</button>
+  </div>
+</ion-content>

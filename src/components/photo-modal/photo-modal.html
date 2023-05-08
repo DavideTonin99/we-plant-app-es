@@ -1,0 +1,26 @@
+<ion-content>
+  <ion-button class="close-button" (click)="closeModal()">
+    <ion-icon slot="icon-only" name="close" color="primary"></ion-icon>
+  </ion-button>
+  <div class="cam-container">
+    <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+            [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+            [videoOptions]="videoOptions"
+            [imageQuality]="1"
+            [height]="camHeigth"
+            (cameraSwitched)="cameraWasSwitched($event)"
+            (initError)="handleInitError($event)"></webcam>
+  </div>
+
+  <div class="webcam-action">
+    <button ion-button icon-only color="secondary" [outline]="true" class="webcam-action-btn"
+            (click)="triggerSnapshot();">
+      <ion-icon name="camera" color="primary"></ion-icon>
+    </button>
+
+    <!--    <button ion-button icon-only [outline]="true" menuClose class="menu__navbar__button">
+          <ion-icon name="close" color="primary"></ion-icon>
+        </button>-->
+  </div>
+
+</ion-content>

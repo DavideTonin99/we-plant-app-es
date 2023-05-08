@@ -1,0 +1,30 @@
+position-selector {
+  #map_canvas_ps {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .button--container {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+  }
+  .locate__container {
+    position: absolute;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    top: 100px;
+    right: 20px;
+    background-color: white;
+    border: solid 1px color($colors, primary);
+  }
+  .icv-title {
+    position: absolute;
+    color: color($colors, dark3);
+    padding: 10px;
+    background-color: rgba(#F1F9FF, 0.5);
+    margin: 20px;
+  }
+}

@@ -1,0 +1,31 @@
+photo-modal {
+  video{
+  }
+  .cam-container{
+    text-align: center;
+  }
+  .close-button{
+    ion-icon{
+      font-size: 3em;
+      margin: 20px;
+      font-weight: bold;
+    }
+  }
+
+  webcam{
+    width: 100%;
+  }
+
+  .webcam-action{
+    text-align: center;
+  }
+
+  .webcam-action-btn{
+    border-radius: 25px;
+  }
+
+  .right{
+    float: right;
+    margin-right: 10px;
+  }
+}

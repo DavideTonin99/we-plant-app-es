@@ -1,0 +1,52 @@
+<!--
+  Generated template for the ExploreDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="card-list" *ngIf="poiList.length > 0">
+    <div *ngFor="let poi of poiList; let odd=odd; let even=even;">
+      <ion-card [class.card--odd]="odd" [class.card--even]="even">
+        <div class="card-img" *ngIf="poi._source.img != null && poi._source.img != ''"
+             [ngStyle]="{'background-image': 'url('+poi._source.img +')'}">
+        </div>
+        <ion-card-content>
+          <ion-card-title (click)="poiDetail(poi)">{{poi._source.tags.name}}</ion-card-title>
+          <p (click)="poiDetail(poi)">Categoria: {{categoryNameIt}}</p>
+          <p (click)="poiDetail(poi)">{{getAddress(poi)}}</p>
+          <div class="card__buttons">
+            <ion-row>
+              <ion-col col-8 (click)="poiDetail(poi)"></ion-col>
+              <ion-col col-2>
+<!--                <button ion-button icon-only [outline]="true" color="light" (click)="debugPoi(poi)">
+                  <ion-icon name="information-circle"></ion-icon>
+                </button>-->
+              </ion-col>
+              <ion-col col-2>
+                <button ion-button icon-only [outline]="true" color="light" (click)="add(poi)">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+  <div *ngIf="poiList.length == 0">
+    <h1>Nessun elemento da mostrare</h1>
+  </div>
+
+
+</ion-content>

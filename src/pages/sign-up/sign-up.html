@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{'SIGNUP.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="login-process">
+  <form class="signup__form"
+        [formGroup]="signupForm">
+
+    <ion-list inset>
+      <ion-item>
+        <!--<ion-label>{{'SIGNUP.EMAIL' | translate}}</ion-label>-->
+        <ion-input formControlName="email"
+                   placeholder="{{'SIGNUP.EMAIL' | translate}}"
+                   type="email"></ion-input>
+      </ion-item>
+      <div class="error-message"
+           *ngIf="submitAttempt && (this.signupForm.controls.email.errors?.required )">
+        {{'LOGIN.EMAIL_REQUIRED' | translate}}
+      </div>
+      <div class="error-message"
+           *ngIf="submitAttempt && (!this.signupForm.controls.email.errors?.required && this.signupForm.controls.email.errors?.email )">
+        {{'LOGIN.INVALID_EMAIL' | translate}}
+      </div>
+      <div class="error-message"
+           *ngIf="submitAttempt && (!!this.signupForm.controls.email.errors?.emailDomain)">
+        {{'LOGIN.INVALID_EMAIL_DOMAIN' | translate}}
+      </div>
+      <ion-item>
+        <!--<ion-label>{{'SIGNUP.USERNAME' | translate}}</ion-label>-->
+        <ion-input formControlName="firstName"
+                   placeholder="{{'SIGNUP.FIRSTNAME' | translate}}"
+                   type="text"></ion-input>
+      </ion-item>
+      <div class="error-message"
+           *ngIf="submitAttempt && (this.signupForm.controls.firstName.errors?.required)">
+        {{'LOGIN.FIRSTNAME_REQUIRED' | translate}}
+      </div>
+      <ion-item>
+        <!--<ion-label>{{'SIGNUP.USERNAME' | translate}}</ion-label>-->
+        <ion-input formControlName="lastName"
+                   placeholder="{{'SIGNUP.LASTNAME' | translate}}"
+                   type="text"></ion-input>
+      </ion-item>
+      <div class="error-message"
+           *ngIf="submitAttempt && (this.signupForm.controls.lastName.errors?.required)">
+        {{'LOGIN.LASTNAME_REQUIRED' | translate}}
+      </div>
+      <ion-item>
+        <!--<ion-label>{{'SIGNUP.PASSWORD' | translate}}</ion-label>-->
+        <ion-input formControlName="password"
+                   placeholder="{{'SIGNUP.PASSWORD' | translate}}"
+                   type="password"></ion-input>
+      </ion-item>
+      <div class="error-message"
+           *ngIf="submitAttempt && (this.signupForm.controls.password.errors?.required)">
+        {{'LOGIN.PASSWORD_REQUIRED' | translate}}
+      </div>
+      <div class="error-message"
+           *ngIf="submitAttempt && (this.signupForm.controls.password.errors?.minlength)">
+        {{'LOGIN.PASSWORD_MIN_LENGTH' | translate}}
+      </div>
+      <ion-item>
+        <ion-input formControlName="confirmPassword"
+                   placeholder="{{'SIGNUP.CONFIRM_PASSWORD' | translate}}"
+                   type="password"></ion-input>
+      </ion-item>
+      <div class="error-message"
+           *ngIf="submitAttempt && (this.signupForm.controls.confirmPassword.errors?.required)">
+        {{'LOGIN.PASSWORD_CONFIRM_REQUIRED' | translate}}
+      </div>
+      <div class="error-message"
+           *ngIf="signupForm.controls.confirmPassword.errors?.MatchPassword && submitAttempt">
+        {{'SIGNUP.PASSWORD_NO_MATCH' | translate}}
+      </div>
+      <div class="privacy-container" *ngIf="!userCreated">
+        <div class="privacy-text">
+          Leggi l'<a href="https://www.weplant.nino.cloud/#/privacy-disclaimer" target="_blank">informativa sul trattamento dei dati
+          personali</a>
+          (ex art. 13 Regolamento UE 2016/679)
+        </div>
+
+        <div class="radio-container" (click)="updatePrivacyOn()">
+          <button ion-button icon-only [outline]="true" class="radio-button" color="light">
+            <ion-icon name="radio-button-on" color="primary" *ngIf="!!privacyOn"></ion-icon>
+            <ion-icon name="radio-button-off" color="primary" *ngIf="!privacyOn"></ion-icon>
+          </button>
+          <label>Presto il consenso</label>
+        </div>
+        <div class="radio-container" (click)="updatePrivacyOff()">
+          <button ion-button icon-only [outline]="true" class="radio-button" color="light">
+            <ion-icon name="radio-button-on" color="primary" *ngIf="!!privacyOff"></ion-icon>
+            <ion-icon name="radio-button-off" color="primary" *ngIf="!privacyOff"></ion-icon>
+          </button>
+          <label>Nego il consenso</label>
+        </div>
+      </div>
+    </ion-list>
+    <div class="button__container">
+      <button ion-button
+              outline
+              class="button--wide"
+              (click)="signup()"
+              [disabled]="!privacyOn">{{'SIGNUP.BTN.SUBMIT' | translate}}
+      </button>
+    </div>
+
+    <div class="link__container">
+      <a (click)="insertKey()" class="link">{{'SIGNUP.KEY_RECEVED' | translate}}</a>
+    </div>
+  </form>
+</ion-content>

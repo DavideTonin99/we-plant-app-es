@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button
+            icon-only
+            menuToggle
+            start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'LOGIN' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding
+             class="login-process">
+  <div class="title__container">
+    <div class="logo"><img src="assets/icon/icon.png"></div>
+    <h1 class="title">WePlant</h1>
+    <!--<h6>inserici le tue credenziali</h6>-->
+    <!--<h6>registrati</h6>-->
+  </div>
+
+  <form class="login__form"
+        [formGroup]="loginForm">
+    <div class="error-message"
+         *ngIf="!loginForm.valid && submitAttempt">{{'LOGIN.REQUIRED_FIELDS' | translate}}
+    </div>
+    <ion-list inset>
+      <ion-item>
+        <!--<ion-label floating>{{'LOGIN.EMAIL' | translate}}</ion-label>-->
+        <ion-input formControlName="email"
+                   placeholder="{{'LOGIN.EMAIL' | translate}}"
+                   type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <!--<ion-label floating>{{'LOGIN.PASSWORD' | translate}}</ion-label>-->
+        <ion-input formControlName="password"
+                   placeholder="{{'LOGIN.PASSWORD' | translate}}"
+                   type="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="button__container">
+      <button ion-button
+              outline
+              class="button--wide"
+              (click)="login()">{{'LOGIN.BTN.INPUT' | translate}}
+      </button>
+    </div>
+    <div class="link__container">
+      <div class="link-text"
+           (click)="recoverPasswor()">{{'LOGIN.FORGOT_PASSWORD' | translate}} <a class="link"> {{'LOGIN.RESET_PASSWORD' | translate}}</a>
+      </div>
+      <div class="link-text"
+           (click)="signUp()">{{ 'LOGIN.NO_ACCOUNT' | translate}}<a class="link"> {{'LOGIN.SIGNUP' | translate}}</a>
+      </div>
+      <div class="link-text"
+           (click)="renewPrivacy()">Hai revocato il consenso?<a class="link"> Presta consenso</a>
+      </div>
+    </div>
+  </form>
+</ion-content>

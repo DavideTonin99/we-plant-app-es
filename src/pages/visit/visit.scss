@@ -1,0 +1,151 @@
+page-visit {
+
+  .visit-title {
+    color: color($colors, primary);
+    font-size: 1.6em !important;
+  }
+  .title__container {
+    text-align: center;
+    padding: 20px;
+
+  }
+
+  .container {
+    /*
+    height: 100vh;
+    */
+    margin-top: 20px;
+  }
+
+  .container ul {
+    margin: 0;
+    list-style: none;
+    position: relative;
+    padding: 1px 100px;
+    color: color($colors, primary);
+    font-size: 13px;
+  }
+/*  .container ul:before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    margin-left: -30px;
+    border-left: 2px solid color($colors, primary);
+  }*/
+  .container ul li {
+    position: relative;
+    margin-left: 0px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0px 14px 5px 14px;
+    width: 200px;
+  }
+  .container ul li:not(:first-child) {
+    /*margin-top: 60px;*/
+  }
+  .container ul li:last-child > span {
+    width: 2px;
+    height: 110% !important;
+    background: transparent;
+    left: -30px;
+    top: 0;
+    position: absolute;
+  }
+
+  .container ul li > span {
+    width: 2px;
+    height: 110% !important;
+    background: color($colors, primary);
+    left: -30px;
+    top: 0;
+    position: absolute;
+  }
+  .container ul li > span:before, .container ul li > span:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid color($colors, primary);
+    position: absolute;
+    background: white;
+    left: -5px;
+    top: 0;
+
+  }
+  .container ul .current-position > span:before, .container ul .current-position > span:after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 4px solid color($colors, primary);
+    position: absolute;
+    background: white;
+    left: -11px;
+    top: 0;
+  }
+
+  .container ul li > div {
+    margin-left: 10px;
+  }
+  .text-container{
+    color: color($colors, dark3);
+  }
+  .container div .title, .container div .type {
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+  .container div .info {
+    font-weight: 300;
+    font-size: 1.2em;
+  }
+  .container div > div {
+    margin-top: 5px;
+  }
+  .container span.number {
+    height: 100%;
+  }
+  .container span.number span {
+    position: absolute;
+    font-size: 10px;
+    right: -42px;
+    font-weight: bold;
+  }
+  .container .current-position span.number span:first-child {
+    top: 4px;
+  }
+  .container span.number span:first-child {
+    top: 0;
+  }
+  .container span.number span:last-child {
+    top: 100%;
+  }
+  .icon{
+    font-size: 2em;
+  }
+
+  .button__container{
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .nino-button{
+    padding: 25px 25px 25px 25px;
+  }
+  .nino-label {
+    margin-left: 20px;
+    color: color($colors, primary);
+  }
+  ion-item {
+    color: color($colors,dark3);
+  }
+  .difficulty{
+    margin-left: 20px;
+    color: color($colors, primary);
+    ion-row{
+      text-align: center;
+    }
+  }
+  .not-selected{
+    background-color: color($colors, primary1);
+    color: color($colors, primary);
+  }
+}

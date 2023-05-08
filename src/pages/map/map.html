@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="selectorMode">Rileva coordinate</ion-title>
+    <ion-title *ngIf="!selectorMode">Alberi nei dintorni</ion-title>
+    <button ion-button
+            icon-only
+            menuToggle
+            start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+<ion-content [ngStyle]="{'display': display}" *ngIf="selectorMode">
+  <div id="map_canvas_selector">
+    <div class="legend">
+      <div class="legend__element">
+        <img src="assets/icon/tree-secondary.png" class="legend__img">
+        <span class="legend__title">Albero senza placchetta</span>
+      </div>
+      <div class="legend__element">
+        <img src="assets/icon/tree.png" class="legend__img">
+        <span class="legend__title">Albero con placchetta</span>
+
+      </div>
+
+    </div>
+    <button class="refresh__container" ion-button icon-only [outline]="true" (click)="refreshMap()">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+    <button class="select__container" ion-button icon-only [outline]="true" (click)="toggleMapType()">
+      <img src="assets/imgs/stack.png" class="stack">
+    </button>
+    <button class="locate__container" ion-button icon-only [outline]="true" (click)="getMyPosition()">
+      <ion-icon name="locate"></ion-icon>
+    </button>
+    <div class="button--container">
+      <button ion-button class="close button--wide" (click)="back()">
+        Conferma posizione
+      </button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content [ngStyle]="{'display': display}" *ngIf="!selectorMode">
+  <div id="map_canvas" #map_canvas>
+    <div class="legend">
+      <div class="legend__element">
+        <img src="assets/icon/tree-secondary.png" class="legend__img">
+        <span class="legend__title">Albero senza placchetta</span>
+      </div>
+      <div class="legend__element">
+        <img src="assets/icon/tree.png" class="legend__img">
+        <span class="legend__title">Albero con placchetta</span>
+
+      </div>
+
+    </div>
+    <button class="refresh__container" ion-button icon-only [outline]="true" (click)="refreshMap()">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+    <button class="select__container" ion-button icon-only [outline]="true" (click)="toggleMapType()">
+      <img src="assets/imgs/stack.png" class="stack">
+    </button>
+    <button class="locate__container" ion-button icon-only [outline]="true" (click)="getMyPosition()">
+      <ion-icon name="locate"></ion-icon>
+    </button>
+  </div>
+</ion-content>

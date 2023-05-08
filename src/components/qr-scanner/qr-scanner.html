@@ -1,0 +1,10 @@
+<ion-content>
+  <ion-button class="close-button" (click)="closeModal()">
+    <ion-icon slot="icon-only" name="close" color="primary"></ion-icon>
+  </ion-button>
+  <zxing-scanner [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']" [enable]="enableScanner"
+                 (scanSuccess)="capturedQr($event)"
+                 (scanError)="scanErrorHandler($event)"
+                 *ngIf="enableScanner"></zxing-scanner>
+</ion-content>
+

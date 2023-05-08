@@ -1,0 +1,22 @@
+page-credits {
+
+  .custom-title {
+    margin-bottom: 30px;
+    color: color($colors, dark2);
+    text-align: center;
+    font-size: medium;
+  }
+  .custom-body {
+    color: color($colors, dark2);
+    margin-top: 20px;
+    text-align: justify;
+  }
+
+  .logo{
+    max-width: 200px;
+  }
+
+  .logo-container{
+    text-align: center;
+  }
+}

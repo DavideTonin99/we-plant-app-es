@@ -1,0 +1,25 @@
+<ion-header>
+<ion-navbar color="primary">
+  <ion-title>Trattamento dei dati personali</ion-title>
+  <button ion-button
+          icon-only
+          menuToggle
+          start>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="privacy-container">
+    <div class="privacy-text">
+      Qui trovi il link ai documenti inerenti al trattamento dei dati personali: <a href="https://www.weplant.nino.cloud/#/privacy-disclaimer" target="_blank">informativa sul trattamento dei dati
+      personali</a> (ex art. 13 Regolamento UE 2016/679)
+    </div>
+  </div>
+  <div class="button-container">
+    <button ion-button color="danger" class="nino-button" (click)="revoke()">
+      Revoca consenso
+    </button>
+  </div>
+</ion-content>

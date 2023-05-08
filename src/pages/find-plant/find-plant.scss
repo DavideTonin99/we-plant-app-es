@@ -1,0 +1,43 @@
+page-find-plant {
+  .form__container {
+    margin-top: 100px;
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+  .input {
+    width: 90%;
+    height: 50px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: xx-large;
+    text-align: center;
+  }
+  .input::placeholder {
+    color: lightgray;
+    opacity: 1; /* Firefox */
+    font-size: x-large;
+  }
+  .input__info {
+    font-size: 30px;
+    vertical-align: bottom;
+    color: color($colors, dark4)
+  }
+  .title__container{
+    margin-bottom: 10px;
+  }
+  .title {
+    color: color($colors, primary);
+    font-size: x-large;
+  }
+  .qr-code__container{
+    margin-top: 20px;
+    text-align: center;
+  }
+  .input__info__qr-code{
+    font-size: 20px;
+    vertical-align: center;
+    color: color($colors, dark4)
+  }
+
+}

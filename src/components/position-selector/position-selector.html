@@ -1,0 +1,13 @@
+<ion-content>
+  <div id="map_canvas_ps">
+    <div class="icv-title"> Clicca sulla mappa per spostare il pin nella posizione desiderata</div>
+    <button class="locate__container" ion-button icon-only [outline]="true" (click)="getMyPosition()">
+      <ion-icon name="locate"></ion-icon>
+    </button>
+    <div class="button--container">
+      <button ion-button class="close button--wide" (click)="chiudi()">
+        Conferma posizione
+      </button>
+    </div>
+  </div>
+</ion-content>

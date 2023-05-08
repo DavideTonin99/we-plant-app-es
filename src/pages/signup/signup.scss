@@ -1,0 +1,36 @@
+page-signup {
+  .signup {
+    background-image: url('../assets/imgs/Verona map.PNG');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .checkbox-icon {
+    border-radius: 8px !important;
+  }
+  .nino-checkbox {
+  }
+  .small__input__container {
+    padding-top: 20px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+  }
+
+  .title__container {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+  .signup-title {
+    color: color($colors, dark3);
+    font-size: 1.6em !important;
+  }
+
+  .content__input{
+    background-color: transparent;
+  }
+}

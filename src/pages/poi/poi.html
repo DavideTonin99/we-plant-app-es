@@ -1,0 +1,131 @@
+<!--
+  Generated template for the PoiPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content *ngIf="!!poi._source">
+  <div class="main-img" *ngIf="!!poi._source.img" [ngStyle]="{'background-image': 'url('+poi.img+')'}">
+    <div class="main-img__title">{{poi._source.tags.name}}</div>
+  </div>
+  <div class="poi-head" *ngIf="poi._source.img == null || poi._source.img == ''">
+    <div class="poi-head__text">{{poi._source.tags.name}}</div>
+    <p class="poi-head__subtitle" *ngIf="!!categoryNameIt || categoryNameIt != ''">Categoria: {{categoryNameIt}}</p>
+  </div>
+  <div class="poi-content" padding>
+    <ion-grid *ngIf="!fromMarker">
+      <ion-row>
+        <ion-col>
+          <div class="button-container--sm" (click)="add(poi)">
+            <button ion-button icon-only outline>
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+            <ion-label>Aggiungi</ion-label>
+          </div>
+        </ion-col>
+        <!--<ion-col>
+          <div class="button-container&#45;&#45;sm">
+            <button ion-button icon-only outline>
+              <ion-icon name="bookmarks"></ion-icon>
+            </button>
+            <ion-label>Salva</ion-label>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="button-container&#45;&#45;sm">
+            <button ion-button icon-only outline>
+              <ion-icon name="ios-heart-outline"></ion-icon>
+            </button>
+            <ion-label>Preferiti</ion-label>
+          </div>
+        </ion-col>-->
+        <!--<ion-col>
+          <div class="button-container&#45;&#45;sm" (click)="presentPopover($event)">
+            <button ion-button icon-only outline>
+              <ion-icon name="menu"></ion-icon>
+            </button>
+            <ion-label>Altro</ion-label>
+          </div>
+        </ion-col>-->
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="fromMarker || stopReached">
+      <ion-row>
+        <ion-col>
+          <div class="button-container--sm"
+               (click)="reached(poi)"
+               *ngIf="!poi.reached">
+            <button ion-button icon-only outline>
+              <ion-icon name="radio-button-off"></ion-icon>
+            </button>
+            <ion-label>Clicca qui se hai raggiunto la tappa</ion-label>
+          </div>
+          <div class="button-container--sm"
+               (click)="reached(poi)"
+               *ngIf="poi.reached">
+            <button ion-button icon-only outline>
+              <ion-icon name="radio-button-on"></ion-icon>
+            </button>
+            <ion-label>Tappa già raggiunta</ion-label>
+          </div>
+        </ion-col>
+        <!--<ion-col>
+          <div class="button-container&#45;&#45;sm">
+            <button ion-button icon-only outline>
+              <ion-icon name="ios-heart-outline"></ion-icon>
+            </button>
+            <ion-label>Preferiti</ion-label>
+          </div>
+        </ion-col>-->
+      </ion-row>
+    </ion-grid>
+    <div class="progress-group" *ngIf="stopReached || fromMarker">
+      <div class="progress-title">{{getVisitPercentage()}}% di visita già fatta</div>
+      <div class="progress-container">
+        <div class="progress">
+          <div class="progress--inner" [ngStyle]="{'width': getVisitPercentage() +'%'}">
+          </div>
+        </div>
+      </div>
+      <div class="progress-title">{{getTimePercentage()}}% di tempo utilizzato</div>
+      <div class="progress-container">
+        <div class="progress">
+          <div class="progress--inner" [ngStyle]="{'width': getTimePercentage() +'%'}">
+          </div>
+        </div>
+      </div>
+      <div class="progress-title">Tempo rimanente {{this.visit.minutesToGo}} minuti</div>
+
+    </div>
+    <div class="poi-text" *ngIf="poi._source.description">
+      {{poi._source.description}}
+    </div>
+    <ion-list>
+      <ion-item *ngIf="!!poi._source.tags.phone">
+        <ion-icon name="call" item-start color="primary"></ion-icon>
+        {{poi._source.tags.phone}}
+      </ion-item>
+      <ion-item *ngIf="!!poi._source.tags.email">
+        <ion-icon name="at" item-start color="primary"></ion-icon>
+        {{poi._source.tags.email}}
+      </ion-item>
+      <ion-item *ngIf="!!poi._source.tags.website">
+        <ion-icon name="globe" item-start color="primary"></ion-icon>
+        <a [href]="poi._source.tags.website">{{poi._source.tags.website}}</a>
+      </ion-item>
+      <ion-item *ngIf="!!poi._source.street_address">
+        <ion-icon name="pin" item-start color="primary"></ion-icon>
+        {{poi._source.street_address}}
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

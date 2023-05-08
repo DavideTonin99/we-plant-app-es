@@ -1,0 +1,14 @@
+qr-scanner {
+  zxing-scanner video{
+    height: 50vh !important;
+    margin-top: 10vh;
+  }
+
+  .close-button{
+    ion-icon{
+      font-size: 3em;
+      margin: 20px;
+      font-weight: bold;
+    }
+  }
+}

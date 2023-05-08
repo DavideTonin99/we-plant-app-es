@@ -1,0 +1,146 @@
+<!--
+  Generated template for the ExplorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title></ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="nino-content">
+<!--  <div class="search" *ngIf="search">
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      (ionCancel)="onCancel($event)"
+      placeholder="Cerca">
+    </ion-searchbar>
+  </div>-->
+  <div class="margin"></div>
+  <div class="nino-row" *ngIf="destination || startPoint">
+    <div class="title"></div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <div class="img-card no-img" [class.img-card--odd]="odd"
+               (click)="addDestionationOrStartPoint()">
+            <div class="img-card__title">
+              <span>La mia posizione</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+<!--  <div class="nino-row">
+    <div class="title">Povegliano</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 *ngFor="let povegliano of poveglianoList; let odd=odd; let even=even;">
+          <div class="img-card no-img" [class.img-card&#45;&#45;odd]="odd"
+               (click)="exploreVenetoNight(povegliano)">
+            <div class="img-card__title">
+              <span>{{povegliano.it}}</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>-->
+  <div class="nino-row">
+    <div class="title">Venetonight 2018</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 *ngFor="let venetoNight of venetoNightList; let odd=odd; let even=even;">
+          <div class="img-card no-img" [class.img-card--odd]="odd"
+               (click)="exploreVenetoNight(venetoNight)">
+            <div class="img-card__title">
+              <span>{{venetoNight.it}}</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="nino-row">
+    <div class="title">Attrazioni turistiche</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let tourism of tourismList; let odd=odd; let even=even;">
+          <div class="img-card no-img" [class.img-card--odd]="odd"
+               (click)="exploreTourism(tourism)">
+            <div class="img-card__title">
+              <span>{{tourism.it}}</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="nino-row">
+    <div class="title">Servizi</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let amenity of amenityList; let odd=odd; let even=even;">
+          <div class="img-card no-img" [class.img-card--odd]="odd" (click)="exploreService(amenity)">
+            <div class="img-card__title">
+              <span>{{amenity.it}}</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!--
+  <div class="nino-row">
+    <div class="title">Mangiare e bere</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="img-card img-card&#45;&#45;odd" [ngStyle]="{'background-image': 'url(../../assets/imgs/pizza.jpg)'}" (click)="exploreDetail()">
+            <div class="img-card__title">
+              <span>Ristoranti</span>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="img-card" [ngStyle]="{'background-image': 'url(../../assets/imgs/bar.jpg)'}" (click)="exploreDetail()">
+            <div class="img-card__title">
+              <span>Bar</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="nino-row">
+    <div class="title">Servizi</div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="img-card img-card&#45;&#45;odd" [ngStyle]="{'background-image': 'url(../../assets/imgs/cars.jpg)'}" (click)="exploreDetail()">
+            <div class="img-card__title">
+              <span>Parcheggi</span>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="img-card" [ngStyle]="{'background-image': 'url(../../assets/imgs/toilet.jpg)'}" (click)="exploreDetail()">
+            <div class="img-card__title">
+              <span>Servizi igienici</span>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>-->
+
+</ion-content>

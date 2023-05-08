@@ -1,0 +1,34 @@
+<ion-menu [content]="mycontent" type="reveal" side="left" class="menu">
+  <ion-header>
+
+    <ion-navbar class="menu__navbar" color="primary">
+      <span class="menu__navbar__title">Impostazioni</span>
+      <button ion-button icon-only [outline]="true" menuClose class="menu__navbar__button">
+        <ion-icon name="close" color="primary"></ion-icon>
+      </button>
+    </ion-navbar>
+
+  </ion-header>
+  <ion-content class="menu__content" padding>
+
+    <div>
+      <button ion-button [outline]="true" (click)="findAlbero()" [disabled]="pageChanging">Trova un albero</button>
+    </div>
+    <div *ngIf="!authProvider.isAnonimusUser()">
+      <button ion-button [outline]="true" (click)="newAlbero()" [disabled]="pageChanging">Nuovo albero</button>
+    </div>
+    <div>
+      <button ion-button [outline]="true" (click)="credits()" [disabled]="pageChanging">Informazioni</button>
+    </div>
+    <div *ngIf="!authProvider.isAnonimusUser()">
+      <button ion-button [outline]="true" (click)="privacy()" [disabled]="pageChanging">Privacy</button>
+    </div>
+    <div *ngIf="!authProvider.isAnonimusUser()">
+      <button ion-button [outline]="true" (click)="logout()" [disabled]="pageChanging">Logout</button>
+    </div>
+    <div *ngIf="authProvider.isAnonimusUser()">
+      <button ion-button [outline]="true" (click)="anonimusLogout()" [disabled]="pageChanging">Logout</button>
+    </div>
+  </ion-content>
+</ion-menu>
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

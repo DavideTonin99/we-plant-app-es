@@ -1,0 +1,35 @@
+page-sign-up {
+  .signup__form{
+    margin-top: 50px;
+  }
+  .button__container{
+    margin-top: 50px;
+  }
+  .link__container{
+    text-align: center;
+    margin-top: 20px;
+    color: color($colors, dark3);
+    font-size: 1.0em;
+  }
+  .privacy-container {
+    margin-top: 20px;
+    text-align: left;
+  }
+  .radio-container button {
+    border: none;
+  }
+
+  .radio-container{
+
+  }
+  .radio-group {
+    margin-top: 20px;
+  }
+  .privacy-text {
+    width: 80%;
+  }
+  .error-message{
+    color: red;
+    margin-left: 1em;
+  }
+}

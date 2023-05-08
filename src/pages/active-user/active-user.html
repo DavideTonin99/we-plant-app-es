@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Attiva utente</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="login-process">
+  <form class="form"
+        [formGroup]="activeForm">
+    <div class="error-message"
+         *ngIf="!activeForm.valid && submitAttempt">Compilare tutti i campi
+    </div>
+    <ion-list>
+      <ion-item>
+        <!--<ion-label>{{'SIGNUP.REGISTRATION_EMAIL' | translate}}</ion-label>-->
+        <ion-input type="code"
+                   formControlName="code"
+                   placeholder="Codice di validazione"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="button__container">
+      <button ion-button
+              outline
+              class="button--wide"
+              (click)="activeUser()">Attiva utente
+      </button>
+    </div>
+  </form>
+</ion-content>
