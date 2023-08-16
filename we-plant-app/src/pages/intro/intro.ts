@@ -52,19 +52,71 @@ export class IntroPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IntroPage');
+    // Set up the loader
+    let loader = this.loaderCtrl.create();
+    loader.present();
+    //
+    // Setup the user and go to the tree page if it exists
     try {
+      // Setup the user
+      // First search of the 'user' parameter in the local storage
+      let user = localStorage.getItem('user');
+      //
+      // If the user doesn't exist authenticate with the Anonymous account
+      if (!!user) {
+        // Login with the User's account and set the configurations in order to be able to make queries
+        // if something goes wrong show the error message
+        this.authProvider.login((<User>JSON.parse(user)).username, (<User>JSON.parse(user)).password)
+        .subscribe(result => {
+          let userToken = `Bearer ${(<any>result).id_token}`;
+          // Configs for the database
+          this.configProvider.userToken = userToken;
+          // Local storage
+          localStorage.setItem("user-token", userToken);
+        }, error2 => {
+          let toast = this.toastCtrl.create({
+            message: "Errore durante l'autenticazione, riprova.",
+            duration: 3000,
+            position: 'top'
+          })
+          toast.present();
+        })
+      } else {
+        // Login with the Anonymous account and set the configurations in order to be able to make queries
+        // if something goes wrong show the error message
+        this.authProvider.registerAnonymousUser(!!this.privacyOn).subscribe(user => {
+          this.authProvider.login(user.username, user.password).subscribe(result => {
+            let userToken = `Bearer ${(<any>result).id_token}`;
+            // Configs for the database
+            this.configProvider.userToken = userToken;
+            // Local storage
+            localStorage.setItem("user-token", userToken);
+            localStorage.setItem('user', JSON.stringify(user))
+          }, error2 => {
+            let toast = this.toastCtrl.create({
+              message: "Errore durante l'autenticazione, riprova.",
+              duration: 3000,
+              position: 'top'
+            })
+            toast.present();
+          })
+        }, error2 => {
+          this.messageProvider.createDefaultToast("Errore durante l'autenticazione. Riprovare.");
+        })
+      }
+      //
+      // Get the tree's id from the URL
       this.objectId = location.href.split("?")[1].split("=")[1];
-
+      // If there is and ID for the tree get the tree
       if (!!this.objectId) {
-        let loader = this.loaderCtrl.create();
-        loader.present();
+        // Get the tree and set the session storage, go to the details of the tree
+        // if something goes wrong show the error message
         this.alberoProvider.findByIdPianta(this.objectId).subscribe((albero: Albero) => {
+          // Setup the session storage
           sessionStorage.setItem('albero', JSON.stringify(albero));
+          // Navigate to the next page
           this.navCtrl.setRoot("AlberoDetailsPage", {albero: albero});
-          loader.dismiss();
         }, err => {
-          loader.dismiss();
           const alert = this.alertCtrl.create({
             message: "Il codice rilevato non è stato trovato nei nostri archivi",
             buttons: [{text: "ok"}]
@@ -72,9 +124,10 @@ export class IntroPage {
           alert.present();
         })
       }
-
-    } catch (e) {
-    }
+    } catch (e) {}
+    //
+    // Stop the loader
+    loader.dismiss();
     console.log(this.objectId);
   }
 
