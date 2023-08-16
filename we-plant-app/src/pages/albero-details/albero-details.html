@@ -82,7 +82,7 @@
           </ion-item>
         </ion-col>
         <ion-col col-3 class="lat-lon__button">
-          <button ion-button icon-only clear (click)="scan()" color="danger">
+          <button type="button" ion-button icon-only clear (click)="scan()" color="danger">
             Scansiona
           </button>
         </ion-col>
@@ -148,7 +148,7 @@
           </ion-item>
         </ion-col>
         <ion-col col-2 class="lat-lon__button">
-          <button ion-button icon-only clear (click)="getCurrentLocation()">
+          <button type="button" ion-button icon-only clear (click)="getCurrentLocation()">
             Rileva
           </button>
         </ion-col>
@@ -161,7 +161,7 @@
           </ion-item>
         </ion-col>
         <ion-col col-2 class="lat-lon__button">
-          <button ion-button icon-only clear (click)="clearLocation()" color="danger">
+          <button type="button" ion-button icon-only clear (click)="clearLocation()" color="danger">
             Reset
           </button>
         </ion-col>
@@ -171,7 +171,7 @@
     <div *ngIf="!isReadOnly()" class="attach-photo">
       <h4>Allega immagini (opzionale)</h4>
       <ion-list>
-        <button ion-button color="primary" (click)="tackPicture()">Allega foto</button>
+        <button type="button" ion-button color="primary" (click)="tackPicture()">Allega foto</button>
       </ion-list>
     </div>
     <div *ngIf="images.length > 0" class="photos">
