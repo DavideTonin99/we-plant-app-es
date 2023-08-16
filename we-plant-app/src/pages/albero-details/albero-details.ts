@@ -433,9 +433,9 @@ export class AlberoDetailsPage {
   };
 
   onSearchBlur() {
-    setTimeout(() => {
-      this.searching = false;
-    }, 0)
+     setTimeout(() => {
+       this.searching = false;
+     }, 150)
   }
 
   selectedEssenza(essenza: Essenza) {

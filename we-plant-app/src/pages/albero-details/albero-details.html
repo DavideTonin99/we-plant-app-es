@@ -34,7 +34,7 @@
       <ion-label floating>Seleziona genere e specie</ion-label>
       <ion-input name="genereESpecieSelect" type="text"
                  [(ngModel)]="searchBar"
-                 (ngModelChange)="inputChange($event)" autocomplete="off" (blur)="onSearchBlur()"
+                 (ngModelChange)="inputChange($event)" autocomplete="off" (ionBlur)="onSearchBlur()"
                  [readonly]="anonimusUser">
       </ion-input>
     </ion-item>
