@@ -519,6 +519,7 @@ export class AlberoDetailsPage {
       if (!this.images || !this.images.length) {
         loader.dismiss();
       }
+      // images section
       this.images.forEach(image => {
         if (!image.id) {
           options.params.imageName = image.name;
@@ -528,6 +529,7 @@ export class AlberoDetailsPage {
           //imageUploadPromise.push(this.fileTransfer.upload(image.url, `${this.configProvider.serverUrl}/api/custom/images/upload`, options));
         }
       })
+      let imageLength = imageUpload$.length;
       forkJoin(imageUpload$).subscribe(res => {
         if (!!this.albero.idPianta) {
           this.alberoProvider.findByIdPianta(this.albero.idPianta).subscribe(res => {
@@ -545,7 +547,6 @@ export class AlberoDetailsPage {
           this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
         }
       }, err => {
-        console.log(err);
         loader.dismiss();
         this.clearData();
         this.alertCtrl.create({
@@ -553,6 +554,11 @@ export class AlberoDetailsPage {
           buttons: [{text: "Ok"}]
         }).present();
       })
+      
+      if(imageLength <= 0) {
+        loader.dismiss();
+        this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
+      }
     }, err => {
       loader.dismiss();
       this.alertCtrl.create({
