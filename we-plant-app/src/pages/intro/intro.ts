@@ -117,11 +117,28 @@ export class IntroPage {
           // Navigate to the next page
           this.navCtrl.setRoot("AlberoDetailsPage", {albero: albero});
         }, err => {
-          const alert = this.alertCtrl.create({
-            message: "Il codice rilevato non è stato trovato nei nostri archivi",
-            buttons: [{text: "ok"}]
-          });
-          alert.present();
+          if(err.status === 404) {
+            // To let user create a new tree he must be logged in
+            let isAnonymous = this.authProvider.isAnonimusUser();
+            if(isAnonymous) {
+              const alert = this.alertCtrl.create({
+                message: "Codice non trovato! Per creare un nuovo albero è necessario autenticarsi.",
+                buttons: [{text: "ok"}]
+              });
+              alert.present();
+            } else {
+              // sessionStorage.removeItem('albero');
+              sessionStorage.setItem('newIdPianta', JSON.stringify(this.objectId));
+              // this.navCtrl.push("FindPlantPage");
+              this.navCtrl.push("AlberoDetailsPage", {newIdPianta: this.objectId});
+            }
+          } else {
+            const alert = this.alertCtrl.create({
+              message: "Il codice rilevato non è stato trovato nei nostri archivi",
+              buttons: [{text: "ok"}]
+            });
+            alert.present();
+          }
         })
       }
     } catch (e) {}

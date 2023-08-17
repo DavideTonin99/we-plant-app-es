@@ -115,8 +115,14 @@ export class AlberoDetailsPage {
 
     this.anonimusUser = this.authProvider.isAnonimusUser();
     this.isCurrentUserAdmin = this.authProvider.isCurrentUserAdmin();
+    // get albero object
     let alberoJSON = sessionStorage.getItem('albero');
     let albero = !!alberoJSON ? JSON.parse(alberoJSON) : null;
+    // get newIdPianta
+    let newIdPiantaJSON = sessionStorage.getItem('newIdPianta');
+    let newIdPianta = !!newIdPiantaJSON ? JSON.parse(newIdPiantaJSON) : null;
+    sessionStorage.removeItem('newIdPianta');
+    
     this.toComplite = !!this.navParams.get("toComplite");
     this.platform.registerBackButtonAction(() => {
       if (!!this.modal) {
@@ -135,6 +141,9 @@ export class AlberoDetailsPage {
       this.initLat = !!this.lat ? this.lat : null;
       this.initLon = !!this.lon ? this.lon : null;
       this.albero.dataPrimaRilevazione = this.albero.dataPrimaRilevazione = datePipe.transform(new Date(), 'yyyy-MM-dd');
+      if(!!newIdPianta) {
+        this.albero.idPianta = newIdPianta;
+      }
     } else {
       this.albero = new Albero();
       let loader = this.loadingCtrl.create();

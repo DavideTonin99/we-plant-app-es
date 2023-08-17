@@ -88,7 +88,7 @@ export class LoginPage {
             this.pouchdbProvider.create('user', user);
             let toast = this.toastCtrl.create({
               message: this.translateService.instant('LOGIN.SUCCESS'),
-              duration: 3000,
+              duration: 1500,
               position: 'bottom',
               showCloseButton: true,
               closeButtonText: "Ok"
