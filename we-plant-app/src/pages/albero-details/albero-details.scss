@@ -1,19 +1,27 @@
 page-albero-details {
-  .item-inner, ion-item {
+  .container-number{
+    gap: 2%;
+  }
+  .number-input {
+    flex-basis: 49%;
+  }
+
+  .item-inner,
+  ion-item {
     /*
     border-bottom-color: transparent !important;
     */
     box-shadow: none !important;
   }
 
-  .image-title{
+  .image-title {
     text-align: left;
     margin-bottom: 10px;
     color: color($colors, dark3)
   }
 
 
-  .image-container{
+  .image-container {
     width: 31%;
     display: inline-block;
     margin-right: 2%;
@@ -28,49 +36,59 @@ page-albero-details {
     background-size: cover;
   }
 
-  .delete-photo{
+  .delete-photo {
     width: 100%;
   }
 
-  .attach-photo{
+  .attach-photo {
     margin-top: 20px;
   }
-  .photos{
+
+  .photos {
     margin-top: 20px;
   }
-  .lat-lon{
+
+  .lat-lon {
     display: flex;
     align-items: center;
   }
-  .lat-lon__inputs{
+
+  .lat-lon__inputs {
     width: 70%;
   }
-  .lat-lon__button{
+
+  .lat-lon__button {
     width: 30%;
   }
-  .plants{
+
+  .plants {
     width: 100%;
     height: 200px;
   }
-  .lat-lon__button{
+
+  .lat-lon__button {
     text-align: center;
   }
-  .lat-lon{
-    ion-item{
+
+  .lat-lon {
+    ion-item {
       padding: 5px;
     }
   }
+
   .link__container {
     text-align: center;
     margin-top: 20px;
     color: color($colors, dark3);
     font-size: 1.0em;
   }
+
   .link-text {
     margin-right: 5px;
     padding: 5px;
   }
-  .text-center{
+
+  .text-center {
     text-align: center;
   }
 }

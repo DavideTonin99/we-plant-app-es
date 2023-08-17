@@ -14,6 +14,7 @@ export class Albero {
   altezza?: number;
   diametroFusto?: number;
   diametro?: number;  wkt: string;
+  circonferenza?: number;
   aggiornamento: string;
   nota?: any;
   tipoDiSuolo?: any;
