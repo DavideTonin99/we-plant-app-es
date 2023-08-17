@@ -111,12 +111,36 @@
     </ion-item>
 
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label floating>Diametro (in cm)</ion-label>
       <ion-input [(ngModel)]="albero.diametro" name="diametro" type="number" min="1" max="10"
                  [readonly]="anonimusUser"></ion-input>
-    </ion-item>
-
+    </ion-item> -->
+    <!-- <ion-radio-group value="measureDiameter">
+      <ion-radio value="circumference">Circonferenza</ion-radio>
+      <ion-radio value="diameter">Diametro</ion-radio>
+    </ion-radio-group> -->
+    <ion-row class="container-number">
+      <!-- <div class="radio-group">
+        <div class="radio-toolbar">
+          <input ion-radio type="radio" id="circumference" name="drone" value="circumference" checked />
+          <label for="circumference">Circonferenza</label>
+        </div>
+        <div class="radio-toolbar">
+          <input ion-radio type="radio" id="diameter" name="drone" value="diameter" checked />
+          <label for="diameter">Diametro</label>
+        </div>
+      </div> -->
+      <ion-item class="number-input" id="circumference-input">
+        <ion-label floating>Circonferenza</ion-label>
+        <ion-input [(ngModel)]="albero.circonferenza" (input)="calculateDiameter()" name="circumference" type="number" step="0.01" min="0" placeholder="Circonferenza"></ion-input>
+      </ion-item>
+      <ion-item class="number-input" id="diameter-input">
+        <ion-label floating>Diametro</ion-label>
+        <ion-input [(ngModel)]="albero.diametro" (input)="calculateCircumference()" name="diameter" type="number" step="0.01" min="0" placeholder="Diametro"></ion-input>
+      </ion-item>
+    </ion-row>
+      
     <ion-item *ngIf="!anonimusUser">
       <ion-label floating>Data impianto</ion-label>
       <ion-datetime [(ngModel)]="albero.dataImpianto" name="dataImpianto" type="date"

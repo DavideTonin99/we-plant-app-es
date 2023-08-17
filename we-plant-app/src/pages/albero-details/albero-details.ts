@@ -47,7 +47,7 @@ declare var navigator: any;
 })
 export class AlberoDetailsPage {
 
-  display = 'block'
+  display = 'block';
   albero: Albero;
   clearDataImpianto: any = {
     buttons: [{
@@ -140,18 +140,25 @@ export class AlberoDetailsPage {
       this.albero = new Albero();
       this.initLat = !!this.lat ? this.lat : null;
       this.initLon = !!this.lon ? this.lon : null;
+
+      this.albero.diametro = 0;
+      this.calculateCircumference();
+
       this.albero.dataPrimaRilevazione = this.albero.dataPrimaRilevazione = datePipe.transform(new Date(), 'yyyy-MM-dd');
       if(!!newIdPianta) {
         this.albero.idPianta = newIdPianta;
       }
     } else {
       this.albero = new Albero();
+
       let loader = this.loadingCtrl.create();
       loader.present();
 
       this.alberoProvider.find(albero.id).subscribe(res => {
         loader.dismiss();
         this.albero = res;
+        this.calculateCircumference();
+
         this.loadImages();
         this.dataUltimoAggiornamento = datePipe.transform(this.albero.dataUltimoAggiornamento, 'dd-MM-yyyy HH:mm');
         this.wkLonLat();
@@ -195,7 +202,7 @@ export class AlberoDetailsPage {
       })
     }
 
-    console.log(this.albero);
+    // console.log(this.albero);
   }
 
   ionViewDidLoad() {
@@ -206,8 +213,17 @@ export class AlberoDetailsPage {
     this.clearData();
   }
 
+
+  calculateDiameter() {
+    this.albero.diametro = this.albero.circonferenza / Math.PI;
+  }
+
+  calculateCircumference() {
+    this.albero.circonferenza = this.albero.diametro * Math.PI;
+  }
+
   checkAndSave() {
-    console.log(this.albero)
+    // console.log(this.albero)
     if (this.toComplite) {
       if (!this.albero.idPianta) {
         this.alertCtrl.create({message: "codice albero non inserita!", buttons: [{text: "ok"}]}).present();
@@ -252,7 +268,7 @@ export class AlberoDetailsPage {
     let modal = this.modalCtrl.create(PhotoModalComponent, {modal: this})
     modal.present();
     modal.onDidDismiss((data) => {
-      console.log(data);
+      // console.log(data);
       this.processPicture(data.imageAsDataUrl);
     });
     /*
@@ -291,7 +307,7 @@ export class AlberoDetailsPage {
 
   loadImages() {
     this.albero.images.forEach(res => {
-      console.log(res);
+      // console.log(res);
       let image = new ImageModel(`${this.configProvider.serverUrl}/api/custom/images/path/${res.id}`);
       image.thumbnailUrl = `${this.configProvider.serverUrl}/api/custom/images/path/thumbnail/${res.id}`;
       image.id = res.id;
@@ -333,8 +349,8 @@ export class AlberoDetailsPage {
 
   mapPositionCallbackFunction = (res: ILatLng) => {
     return new Promise((resolve, reject) => {
-      console.log('myCallbackFunction');
-      console.log(res);
+      // console.log('myCallbackFunction');
+      // console.log(res);
       if (!!res && !!res.lng && !!res.lat) {
         this.lat = res.lat
         this.lon = res.lng
@@ -357,8 +373,8 @@ export class AlberoDetailsPage {
     loader.present();
 
     navigator.geolocation.getCurrentPosition((success) => {
-      console.log(success.coords.latitude)
-      console.log(success.coords.longitude)
+      // console.log(success.coords.latitude)
+      // console.log(success.coords.longitude)
       this.lon = success.coords.longitude;
       this.lat = success.coords.latitude;
       this.albero.wkt = `POINT (${this.lon} ${this.lat})`
@@ -438,7 +454,7 @@ export class AlberoDetailsPage {
       this.searching = false;
       this.essenzaSearchResult = [];
     }
-    console.log(searchBar);
+    // console.log(searchBar);
   };
 
   onSearchBlur() {
@@ -448,7 +464,7 @@ export class AlberoDetailsPage {
   }
 
   selectedEssenza(essenza: Essenza) {
-    console.log(essenza);
+    // console.log(essenza);
     let loader = this.loadingCtrl.create();
     loader.present();
     this.alberoProvider.getEssenzaAudit(essenza.id).subscribe(res => {
