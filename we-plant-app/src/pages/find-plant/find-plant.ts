@@ -26,6 +26,7 @@ import {AuthProvider} from "../../providers/auth/auth";
 export class FindPlantPage {
 
   plantCode: string;
+  private alberoList: Array<Albero> = [];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -120,6 +121,12 @@ export class FindPlantPage {
         alert.present();
       })
     }
+  }
+  /*
+  * Go to the details page of the tree we selected
+  */
+  goToDetails(albero){
+    
   }
 
 }
