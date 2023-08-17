@@ -525,9 +525,6 @@ export class AlberoDetailsPage {
         headers: {Authorization: localStorage.getItem("user-token")}
       };
       let imageUpload$ = [];
-      if (!this.images || !this.images.length) {
-        loader.dismiss();
-      }
       // images section
       this.images.forEach(image => {
         if (!image.id) {
@@ -543,20 +540,16 @@ export class AlberoDetailsPage {
         if (!!this.albero.idPianta) {
           this.alberoProvider.findByIdPianta(this.albero.idPianta).subscribe(res => {
             this.clearData();
-            loader.dismiss();
             this.albero = res;
             this.loadImages();
             this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
           }, err => {
-            loader.dismiss();
             this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
           })
         } else {
-          loader.dismiss();
           this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
         }
       }, err => {
-        loader.dismiss();
         this.clearData();
         this.alertCtrl.create({
           message: "Errore durante il salvataggio dei dati. Riprovare più tardi.",
@@ -565,16 +558,15 @@ export class AlberoDetailsPage {
       })
       
       if(imageLength <= 0) {
-        loader.dismiss();
         this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
       }
     }, err => {
-      loader.dismiss();
       this.alertCtrl.create({
         message: "Errore durante il salvataggio dei dati. Riprovare più tardi.",
         buttons: [{text: "Ok"}]
       }).present();
     })
+    loader.dismiss();
   }
 
   private wkLonLat() {
