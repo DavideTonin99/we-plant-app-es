@@ -74,6 +74,10 @@ export class AlberoProvider {
     return this.http.get<Array<Albero>>(`${this.configProvider.serverUrl}/api/custom/alberos`)
   }
 
+  getAllTreesSortedByLastUpdate() {
+    return this.http.get<Array<Albero>>(`${this.configProvider.serverUrl}/api/custom/alberos/sorted-by-last-update`)
+  }
+
   updateAlberoAndEssenza(albero: Albero) {
     return this.http.post<Albero>(`${this.configProvider.serverUrl}/api/custom/alberos/albero-and-essenza-audit`, albero)
   }

@@ -24,7 +24,7 @@ export class ListOfTreesComponent {
         public alertCtrl: AlertController
     ) {
         // Get all the trees
-        this.alberoProvider.getAllTrees().subscribe((trees: Array<Albero>) => {
+        this.alberoProvider.getAllTreesSortedByLastUpdate().subscribe((trees: Array<Albero>) => {
             this.treeList = trees;
         }, err => {
             console.error(err);
@@ -45,9 +45,6 @@ export class ListOfTreesComponent {
         if (this.navParams.get('isEmbedded') === false) {
             this.isEmbedded = this.navParams.get('isEmbedded');
         }
-        console.log("????")
-        console.log(this.isEmbedded)
-        console.log(this.navParams.get('isEmbedded'))
     }
 
     showAllTrees() {
