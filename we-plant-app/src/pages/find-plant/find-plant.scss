@@ -1,10 +1,15 @@
 page-find-plant {
+  $color_1: lightgray;
+  $color_2: color($colors, dark4);
+  $color_3: color($colors, primary);
+
   .form__container {
     margin-top: 100px;
     width: 100%;
     text-align: center;
     display: block;
   }
+
   .input {
     width: 90%;
     height: 50px;
@@ -12,32 +17,48 @@ page-find-plant {
     padding-left: 20px;
     font-size: xx-large;
     text-align: center;
+
+    &::placeholder {
+      color: $color_1;
+      opacity: 1;
+      font-size: x-large;
+    }
   }
-  .input::placeholder {
-    color: lightgray;
-    opacity: 1; /* Firefox */
-    font-size: x-large;
-  }
+
   .input__info {
     font-size: 30px;
     vertical-align: bottom;
-    color: color($colors, dark4)
+    color: $color_2;
   }
-  .title__container{
+
+  .title__container {
     margin-bottom: 10px;
   }
+
   .title {
-    color: color($colors, primary);
+    color: $color_3;
     font-size: x-large;
   }
-  .qr-code__container{
+
+  .qr-code__container {
     margin-top: 20px;
     text-align: center;
   }
-  .input__info__qr-code{
+
+  .input__info__qr-code {
     font-size: 20px;
     vertical-align: center;
-    color: color($colors, dark4)
+    color: $color_2;
   }
 
+  .container-trees {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .spacer {
+    flex-grow: 1;
+  }
 }

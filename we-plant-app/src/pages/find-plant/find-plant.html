@@ -39,11 +39,10 @@
         </button>
       </div>
     </form>
-    <div>
-      <span class = "title">Ultimi X alberi inseriti</span>
-      <ion-item *ngFor="let albero of alberoList" (click)="goToDetails(albero)">
-        {{albero.id}} {{albero.essenza.genereESpecie}}
-      </ion-item>
+    <div style="padding: 15px;height: 50vh;">
+      <page-list-of-trees>
+
+      </page-list-of-trees>
     </div>
   </div>
 

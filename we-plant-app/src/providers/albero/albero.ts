@@ -27,6 +27,10 @@ export class AlberoProvider {
     return this.http.get<Albero>(`${this.configProvider.serverUrl}/api/custom/alberos/by-id-pianta/${idPianta}`)
   }
 
+  getAllTrees() {
+    return this.http.get<Array<Albero>>(`${this.configProvider.serverUrl}/api/custom/alberos`)
+  }
+
   updateAlberoAndEssenza(albero: Albero) {
     return this.http.post<Albero>(`${this.configProvider.serverUrl}/api/custom/alberos/albero-and-essenza-audit`, albero)
   }

@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar color="primary" *ngIf="!isEmbedded">
+        <button ion-button icon-only menuToggle start>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Lista degli alberi</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<div class="container-trees" *ngIf="isEmbedded">
+    <div class="spacer" style="flex-basis: 33%;"></div>
+    <span class="title" style="flex-basis: 33%;">Ultimi {{numberOfTrees}} alberi aggiornati</span>
+    <button ion-button (click)="showAllTrees()" type="button" style="flex-basis: 33%;"> Mostra tutti</button>
+</div>
+
+<ion-content>
+    <!-- <ion-item>
+        <div style="display: flex; flex-direction: row; gap: 20px;">
+            <p style="flex-basis: 20%;">ID</p>
+            <p style="flex-basis: 40%;">Genere e Specie</p>
+            <p style="flex-basis: 40%;">Data ultimo aggiornamento</p>
+        </div>
+    </ion-item> -->
+
+    <ion-card
+        *ngFor="let tree of (numberOfTrees > 0 ? treeList.slice(0, numberOfTrees) : treeList)"
+        (click)="goToDetails(tree)"
+        style="cursor: pointer; padding:10px;">
+        <div style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap;">
+            <div style="flex-basis: 30%; flex-grow: 1;">
+                <h3>ID</h3>
+                <p>{{tree.idPianta}}</p>
+            </div>
+            <div style="flex-basis: 30%; flex-grow: 1;">
+                <h3>Genere e Specie</h3>
+                <p>{{tree.essenza.genereESpecie}}</p>
+            </div>
+            <div style="flex-basis: 30%; flex-grow: 1;">
+                <h3>Data ultimo aggiornamento</h3>
+                <p>{{tree.dataUltimoAggiornamento}}</p>
+            </div>
+        </div>
+    </ion-card>
+</ion-content>
