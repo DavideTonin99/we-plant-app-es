@@ -19,9 +19,52 @@ export class AlberoProvider {
     console.log('Hello AlberoProvider Provider');
   }
 
+  /*
+    this function will return all the trees ordered by dataUltimoAggiornamento desc
+  */
+  async getAllSorted() {
+    // http://localhost:9000/api/custom/alberos?page=2&paged=true&size=100&sort=dataUltimoAggiornamento%2Cdesc
+    // default params
+    let sortString = "dataUltimoAggiornamento,desc";
+    let page = 1;
+    let size = 100;
+    // handling results
+    let result = [];
+    let fetching = true;
+    do {
+      // create request string
+      let requestString = `${this.configProvider.serverUrl}/api/custom/alberos?page=${page}&paged=true&size=${size}&sort=${sortString}`;
+      // make request
+      await this.http.get<Array<Albero>>(requestString).subscribe(res => {
+        console.log(page);
+        console.log(size);
+        console.log('-----')
+        console.log(fetching);
+        console.log(res);
+        console.log('-----')
+        console.log(res.length);
+        console.log(res.length < size);
+        console.log('*********')
+        // since res is an array we can control the length.
+        // if the length is not equal to the size of the page then stop fetching trees
+        if(res.length < size) fetching = false;
+        else {
+          // else we can add the trees to the result array
+          for(let index in res) result.push(res[index])
+        }
+      });
+
+      page++;
+    }while(fetching && page < 10)
+
+    console.log(result);
+    console.log(result.length);
+  }
+
   find(id: number) {
     return this.http.get<Albero>(`${this.configProvider.serverUrl}/api/custom/alberos/${id}`)
   }
+
 
   findByIdPianta(idPianta: number) {
     return this.http.get<Albero>(`${this.configProvider.serverUrl}/api/custom/alberos/by-id-pianta/${idPianta}`)
