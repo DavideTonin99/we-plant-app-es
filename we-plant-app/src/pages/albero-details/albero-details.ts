@@ -30,6 +30,7 @@ import {QrScannerComponent} from "../../components/qr-scanner/qr-scanner";
 import {PhotoModalComponent} from "../../components/photo-modal/photo-modal";
 import {Observable} from "rxjs/Observable";
 import {forkJoin} from "rxjs/observable/forkJoin";
+import { JhUserModel } from '../../model/jhUser-model';
 
 declare var navigator: any;
 
@@ -89,6 +90,7 @@ export class AlberoDetailsPage {
   anonimusUser = false;
   isCurrentUserAdmin;
   currentUser;
+  usersList : Array<JhUserModel> = [];
   private essenzaSearchResult: Array<Essenza> = [];
   private modal: Modal;
 
@@ -111,8 +113,10 @@ export class AlberoDetailsPage {
               public toastCtrl: ToastController,
               public authProvider: AuthProvider,
               public platform: Platform) {
-
-
+    
+    alberoProvider.getUsersByIdPianta(2).subscribe(res =>{
+      console.log(res);
+    })
     this.anonimusUser = this.authProvider.isAnonimusUser();
     this.isCurrentUserAdmin = this.authProvider.isCurrentUserAdmin();
     // get albero object
@@ -160,6 +164,7 @@ export class AlberoDetailsPage {
         this.calculateCircumference();
 
         this.loadImages();
+        this.loadUsersCredits();
         this.dataUltimoAggiornamento = datePipe.transform(this.albero.dataUltimoAggiornamento, 'dd-MM-yyyy HH:mm');
         this.wkLonLat();
         this.initLat = !!this.lat ? this.lat : null;
@@ -315,6 +320,12 @@ export class AlberoDetailsPage {
       image.cratedById = res.cratedById;
       this.images.push(image);
     })
+  }
+
+  loadUsersCredits(){
+    //this.usersList = this.alberoProvider.getUsersByIdPianta(this.albero.id);
+    // let userTEst = new JhUserModel(1,true, ["ciao","COMESTAI"],"me", new Date("2023-08-21"),"test","test","what","the","fuck",new Date("2023-08-21"),"icolo","sHUH?");
+    // this.usersList.push(userTEst);
   }
 
   removeCachedImages() {

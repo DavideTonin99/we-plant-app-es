@@ -213,7 +213,25 @@
         </div>
       </div>
 
+    <div>
+      <span class= 'attach-photo'>Crediti:</span>
+      <ion-card
+            *ngFor="let user of usersList"
+            style="cursor: pointer; padding:10px;">
+            <div style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap;">
+                <div style="flex-basis: 45%; flex-grow: 1;">
+                    <h3 style="font-weight: bold;">Nome</h3>
+                    <p>{{user.firstName}}</p>
+                </div>
+                <div style="flex-basis: 45%; flex-grow: 1;">
+                    <h3 style="font-weight: bold;">Cognome</h3>
+                    <p>{{user.lastName}}</p>
+                </div>
+            </div>
+      </ion-card>
+      </div>
     </div>
+
     <div class="button__container" *ngIf="!anonimusUser">
       <button ion-button
               class="button--wide"
