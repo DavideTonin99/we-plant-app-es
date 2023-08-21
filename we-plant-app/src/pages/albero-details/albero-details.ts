@@ -268,8 +268,9 @@ export class AlberoDetailsPage {
     let modal = this.modalCtrl.create(PhotoModalComponent, {modal: this})
     modal.present();
     modal.onDidDismiss((data) => {
-      // console.log(data);
-      this.processPicture(data.imageAsDataUrl);
+      if(data !== null){
+        this.processPicture(data.imageAsDataUrl);
+      }
     });
     /*
     this.alertCtrl.create({
