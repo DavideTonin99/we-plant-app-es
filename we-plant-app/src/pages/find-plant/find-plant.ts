@@ -123,11 +123,4 @@ export class FindPlantPage {
       })
     }
   }
-  /*
-  * Go to the details page of the tree we selected
-  */
-  goToDetails(albero){
-    
-  }
-
 }

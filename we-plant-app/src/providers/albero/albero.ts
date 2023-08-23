@@ -4,6 +4,7 @@ import {ConfigProvider} from "../config/config";
 import {Albero, Essenza} from "../../model/albero.model";
 import {Observable} from "rxjs/Observable";
 import {AlberoVisit} from "../../model/albero-visit.model";
+import { JhUserModel } from '../../model/jhUser-model';
 import { int } from '@zxing/library/esm/customTypings';
 
 /*
@@ -105,6 +106,10 @@ export class AlberoProvider {
 
   findByIdPianta(idPianta: number) {
     return this.http.get<Albero>(`${this.configProvider.serverUrl}/api/custom/alberos/by-id-pianta/${idPianta}`)
+  }
+
+  getUsersByIdPianta(idPianta: number) {
+    return this.http.get<Array<JhUserModel>>(`${this.configProvider.serverUrl}/api/custom/alberos/users-by-id-pianta/${idPianta}`)
   }
 
   getAllTrees() {

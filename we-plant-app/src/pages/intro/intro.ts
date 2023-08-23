@@ -129,7 +129,7 @@ export class IntroPage {
             } else {
               // sessionStorage.removeItem('albero');
               sessionStorage.setItem('newIdPianta', JSON.stringify(this.objectId));
-              // this.navCtrl.push("FindPlantPage");
+              this.navCtrl.setRoot("FindPlantPage");
               this.navCtrl.push("AlberoDetailsPage", {newIdPianta: this.objectId});
             }
           } else {
