@@ -24,11 +24,11 @@ import {ElasticlunrProvider} from "../../providers/elasticlunr/elasticlunr";
 import {ComuneProvider} from "../../providers/comune/comune";
 import {AlberoVisit} from "../../model/albero-visit.model";
 import {AuthProvider} from "../../providers/auth/auth";
-import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
+// import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
 import {ILatLng} from "@ionic-native/google-maps";
 import {QrScannerComponent} from "../../components/qr-scanner/qr-scanner";
 import {PhotoModalComponent} from "../../components/photo-modal/photo-modal";
-import {Observable} from "rxjs/Observable";
+// import {Observable} from "rxjs/Observable";
 import {forkJoin} from "rxjs/observable/forkJoin";
 import { JhUserModel } from '../../model/jhUser-model';
 
@@ -114,9 +114,6 @@ export class AlberoDetailsPage {
               public authProvider: AuthProvider,
               public platform: Platform) {
     
-    alberoProvider.getUsersByIdPianta(2).subscribe(res =>{
-      console.log(res);
-    })
     this.anonimusUser = this.authProvider.isAnonimusUser();
     this.isCurrentUserAdmin = this.authProvider.isCurrentUserAdmin();
     // get albero object
@@ -162,7 +159,6 @@ export class AlberoDetailsPage {
         loader.dismiss();
         this.albero = res;
         this.calculateCircumference();
-
         this.loadImages();
         this.loadUsersCredits();
         this.dataUltimoAggiornamento = datePipe.transform(this.albero.dataUltimoAggiornamento, 'dd-MM-yyyy HH:mm');
@@ -323,9 +319,9 @@ export class AlberoDetailsPage {
   }
 
   loadUsersCredits(){
-    //this.usersList = this.alberoProvider.getUsersByIdPianta(this.albero.id);
-    // let userTEst = new JhUserModel(1,true, ["ciao","COMESTAI"],"me", new Date("2023-08-21"),"test","test","what","the","fuck",new Date("2023-08-21"),"icolo","sHUH?");
-    // this.usersList.push(userTEst);
+    this.alberoProvider.getUsersByIdPianta(this.albero.idPianta).subscribe(res =>{
+      this.usersList = res;
+    })
   }
 
   removeCachedImages() {

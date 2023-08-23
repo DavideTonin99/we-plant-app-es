@@ -5,8 +5,8 @@ import {Albero} from "../../model/albero.model";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import _ from "lodash";
 import {ComuneProvider} from "../../providers/comune/comune";
-import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
-import {ILatLng} from "@ionic-native/google-maps";
+// import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
+// import {ILatLng} from "@ionic-native/google-maps";
 import {QrScannerComponent} from "../../components/qr-scanner/qr-scanner";
 import {ConfigProvider} from "../../providers/config/config";
 import {AuthProvider} from "../../providers/auth/auth";
@@ -99,8 +99,8 @@ export class FindPlantPage {
    * Find the plant based on plant code
    */
   findPlant() {
-    let plnatCodeSplit = this.plantCode.split("?")[1];
-    this.plantCode = !!plnatCodeSplit ? plnatCodeSplit.split("=")[1] : this.plantCode;
+    let plantCodeSplit = (this.plantCode || "").split("?")[1];
+    this.plantCode = !!plantCodeSplit ? plantCodeSplit.split("=")[1] : this.plantCode;
     let plantCodeNum = !isNaN(parseInt(this.plantCode)) ? parseInt(this.plantCode) : null;
     if (!plantCodeNum) {
       let alert = this.alertCtrl.create(
@@ -112,7 +112,7 @@ export class FindPlantPage {
     } else {
       this.alberoProvider.findByIdPianta(plantCodeNum).subscribe((albero: Albero) => {
         sessionStorage.setItem('albero', JSON.stringify(albero));
-        this.navCtrl.push("AlberoDetailsPage", {albero: albero})
+        this.navCtrl.push("AlberoDetailsPage", {albero: albero});
 
       }, err => {
         const alert = this.alertCtrl.create({

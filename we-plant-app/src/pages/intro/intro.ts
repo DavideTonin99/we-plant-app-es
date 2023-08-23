@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {
   AlertController,
-  IonicPage, LoadingController, MenuController, NavController, NavParams, Platform,
-  ToastController
+  IonicPage, LoadingController, MenuController, NavController, NavParams, ToastController
 } from 'ionic-angular';
 import {User} from "../../model/user.model";
 import {AuthProvider} from "../../providers/auth/auth";

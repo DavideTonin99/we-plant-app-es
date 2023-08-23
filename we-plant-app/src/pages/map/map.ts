@@ -13,7 +13,6 @@ import {
 } from 'ionic-angular';
 import {
   Encoding,
-  GoogleMap,
   GoogleMaps,
   GoogleMapsEvent,
   ILatLng,

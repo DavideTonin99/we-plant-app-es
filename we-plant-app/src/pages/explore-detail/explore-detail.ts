@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {PoiPage} from "../poi/poi";
+// import {PoiPage} from "../poi/poi";
 import {PoiProvider} from "../../providers/poi/poi";
 import {VisitProvider} from "../../providers/visit/visit";
 import {MessageProvider} from "../../providers/message/message";
