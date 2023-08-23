@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AlertController, IonicPage, NavController, NavParams, Thumbnail } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AlberoProvider } from "../../providers/albero/albero";
 import { Albero } from '../../model/albero.model';

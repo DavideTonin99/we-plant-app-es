@@ -2,7 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {ConfigProvider} from "../config/config";
 import {User} from "../../model/user.model";
-import {JhUserModel} from "../../model/jhUser-model";
+// import {JhUserModel} from "../../model/jhUser-model";
 import {PouchdbProvider} from "../pouchdb/pouchdb";
 import {Observable} from "rxjs/Observable";
 import * as jwt_decode from "jwt-decode";

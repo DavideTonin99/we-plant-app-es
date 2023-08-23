@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import _ from "lodash";
-import {Albero} from "../../model/albero.model";
-import {AlberoProvider} from "../../providers/albero/albero";
-import {AlertController, NavController, ViewController} from "ionic-angular";
+// import _ from "lodash";
+// import {Albero} from "../../model/albero.model";
+// import {AlberoProvider} from "../../providers/albero/albero";
+import { NavController, ViewController} from "ionic-angular";
+import { BarcodeFormat } from '@zxing/library';
 
 /**
  * Generated class for the QrScannerComponent component.
@@ -16,10 +17,16 @@ import {AlertController, NavController, ViewController} from "ionic-angular";
 })
 export class QrScannerComponent {
 
-  text: string;
-  plantCode: number;
-  enableScanner: boolean = false;
+  // Settings for the barcoder reader
+  enableScanner : boolean = false;
+  allowedFormats : Array<number> = [BarcodeFormat.QR_CODE, BarcodeFormat.EAN_13, BarcodeFormat.CODE_128, BarcodeFormat.DATA_MATRIX];
+  timeBetweenScans : number = 200;
+  autofocusEnabled : boolean = false;
+  previewFitMode : string = 'contain';
+  tryHarder : boolean = false;
 
+  text : string;
+  plantCode : number;  
 
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController) {

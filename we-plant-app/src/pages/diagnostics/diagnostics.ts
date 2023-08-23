@@ -4,7 +4,7 @@ import {
   Platform
 } from 'ionic-angular';
 import {AreaVerdeModel} from "../../model/areaVerde";
-import {Geolocation, Geoposition} from "@ionic-native/geolocation";
+import {Geolocation} from "@ionic-native/geolocation";
 import {ComuneProvider} from "../../providers/comune/comune";
 import {AlberoProvider} from "../../providers/albero/albero";
 import {WktProvider} from "../../providers/wkt/wkt";
