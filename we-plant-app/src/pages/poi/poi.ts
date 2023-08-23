@@ -8,7 +8,7 @@ import {
   PopoverController,
   ToastController
 } from 'ionic-angular';
-import {PoiOptionsPage} from "../poi-options/poi-options";
+// import {PoiOptionsPage} from "../poi-options/poi-options";
 import {VisitProvider} from "../../providers/visit/visit";
 import {MessageProvider} from "../../providers/message/message";
 import {Stop, Visit} from "../../model/visit.model";

@@ -3,9 +3,9 @@ import {AlertController, MenuController, Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {TranslateService} from "@ngx-translate/core";
-import {AlberoDetailsPage} from "../pages/albero-details/albero-details";
+// import {AlberoDetailsPage} from "../pages/albero-details/albero-details";
 import {AuthProvider} from "../providers/auth/auth";
-import {PrivacyPage} from "../pages/privacy/privacy";
+// import {PrivacyPage} from "../pages/privacy/privacy";
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +14,7 @@ export class MyApp {
   rootPage: any;
   @ViewChild(Nav) nav: Nav;
   public alertShown: boolean = false;
-  private pageChanging: boolean = false
+  private pageChanging: boolean = false;
 
   constructor(private platform: Platform,
               statusBar: StatusBar,

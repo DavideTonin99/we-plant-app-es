@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {ExploreDetailPage} from "../explore-detail/explore-detail";
+// import {ExploreDetailPage} from "../explore-detail/explore-detail";
 import {CategoryProvider} from "../../providers/category/category";
 import {VisitProvider} from "../../providers/visit/visit";
-import {StartEndPoint} from "../../model/startEndPoint.model";
+// import {StartEndPoint} from "../../model/startEndPoint.model";
 import {MessageProvider} from "../../providers/message/message";
 import {VisitUtilProvider} from "../../providers/visit-util/visit-util";
 

@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {PrivacyProvider} from "../../providers/privacy/privacy";
 import {AuthProvider} from "../../providers/auth/auth";
-import {JhUserModel} from "../../model/jhUser-model";
-import {UserModel} from "../../model/user";
+// import {JhUserModel} from "../../model/jhUser-model";
+// import {UserModel} from "../../model/user";
 
 /**
  * Generated class for the PrivacyPage page.

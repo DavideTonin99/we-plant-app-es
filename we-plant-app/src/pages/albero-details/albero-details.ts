@@ -24,11 +24,11 @@ import {ElasticlunrProvider} from "../../providers/elasticlunr/elasticlunr";
 import {ComuneProvider} from "../../providers/comune/comune";
 import {AlberoVisit} from "../../model/albero-visit.model";
 import {AuthProvider} from "../../providers/auth/auth";
-import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
+// import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
 import {ILatLng} from "@ionic-native/google-maps";
 import {QrScannerComponent} from "../../components/qr-scanner/qr-scanner";
 import {PhotoModalComponent} from "../../components/photo-modal/photo-modal";
-import {Observable} from "rxjs/Observable";
+// import {Observable} from "rxjs/Observable";
 import {forkJoin} from "rxjs/observable/forkJoin";
 import { JhUserModel } from '../../model/jhUser-model';
 
