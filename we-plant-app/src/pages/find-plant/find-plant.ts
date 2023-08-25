@@ -37,7 +37,7 @@ export class FindPlantPage {
               private modalCtrl: ModalController,
               private configProvider: ConfigProvider,
               private authProvider: AuthProvider) {
-                this.alberoProvider.getAllSorted();
+                //this.alberoProvider.getAllSorted();
   }
 
   ionViewDidLoad() {
