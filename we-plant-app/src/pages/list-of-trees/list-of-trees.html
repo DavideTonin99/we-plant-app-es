@@ -14,13 +14,13 @@
 </div>
 
 <ion-content>
-    <!-- <ion-item>
+    <ion-item>
         <div style="display: flex; flex-direction: row; gap: 20px;">
-            <p style="flex-basis: 20%;">ID</p>
-            <p style="flex-basis: 40%;">Genere e Specie</p>
-            <p style="flex-basis: 40%;">Data ultimo aggiornamento</p>
+            <h3 style="flex-basis: 30%;">ID</h3>
+            <h3 style="flex-basis: 30%;">Genere e Specie</h3>
+            <h3 style="flex-basis: 30%;">Data ultimo aggiornamento</h3>
         </div>
-    </ion-item> -->
+    </ion-item>
 
     <ion-card
         *ngFor="let tree of (numberOfTrees > 0 ? treeList.slice(0, numberOfTrees) : treeList)"
@@ -28,15 +28,15 @@
         style="cursor: pointer; padding:10px;">
         <div style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap;">
             <div style="flex-basis: 30%; flex-grow: 1;">
-                <h3 style="font-weight: bold;">ID</h3>
+                <!-- <h3 style="font-weight: bold;">ID</h3> -->
                 <p>{{tree.idPianta}}</p>
             </div>
             <div style="flex-basis: 30%; flex-grow: 1;">
-                <h3 style="font-weight: bold;">Genere e Specie</h3>
+                <!-- <h3 style="font-weight: bold;">Genere e Specie</h3> -->
                 <p>{{tree.essenza.genereESpecie}}</p>
             </div>
             <div style="flex-basis: 30%; flex-grow: 1;">
-                <h3 style="font-weight: bold;">Data ultimo aggiornamento</h3>
+                <!-- <h3 style="font-weight: bold;">Data ultimo aggiornamento</h3> -->
                 <p>{{tree.dataUltimoAggiornamento}}</p>
             </div>
         </div>
