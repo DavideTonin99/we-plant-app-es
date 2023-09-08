@@ -31,15 +31,15 @@
     <ion-card *ngFor="let tree of (numberOfTrees > 0 ? treeList.slice(0, numberOfTrees) : treeList)"
         (click)="goToDetails(tree)" style="cursor: pointer; padding:10px;">
         <div style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap;">
-            <div style="flex-basis: 30%; flex-grow: 1;">
+            <div style="flex-basis: 30%; flex-grow: 1; text-align: center;">
                 <!-- <h3 style="font-weight: bold;">ID</h3> -->
                 <p>{{tree.idPianta}}</p>
             </div>
-            <div style="flex-basis: 30%; flex-grow: 1;">
+            <div style="flex-basis: 30%; flex-grow: 1; text-align: center;">
                 <!-- <h3 style="font-weight: bold;">Genere e Specie</h3> -->
                 <p>{{tree.essenza.genereESpecie}}</p>
             </div>
-            <div style="flex-basis: 30%; flex-grow: 1;">
+            <div style="flex-basis: 30%; flex-grow: 1; text-align: center;">
                 <!-- <h3 style="font-weight: bold;">Data ultimo aggiornamento</h3> -->
                 <p>{{tree.dataUltimoAggiornamento.toLocaleString()}}</p>
             </div>
