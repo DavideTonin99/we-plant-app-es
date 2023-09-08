@@ -15,10 +15,10 @@
 
 <ion-content>
     <ion-item>
-        <div style="display: flex; flex-direction: row; gap: 20px;">
-            <h3 style="flex-basis: 30%;">ID</h3>
-            <h3 style="flex-basis: 30%;">Genere e Specie</h3>
-            <h3 style="flex-basis: 30%;">Data ultimo aggiornamento</h3>
+        <div style="display: flex; flex-direction: row; gap: 20px; align-content: center; justify-content: center;">
+            <h3 style="flex-basis: 30%; font-weight: bold;">ID</h3>
+            <h3 style="flex-basis: 30%; font-weight: bold;">Genere e Specie</h3>
+            <h3 style="flex-basis: 30%; font-weight: bold;">Data ultimo aggiornamento</h3>
         </div>
     </ion-item>
 
@@ -37,7 +37,7 @@
             </div>
             <div style="flex-basis: 30%; flex-grow: 1;">
                 <!-- <h3 style="font-weight: bold;">Data ultimo aggiornamento</h3> -->
-                <p>{{tree.dataUltimoAggiornamento}}</p>
+                <p>{{tree.dataUltimoAggiornamento.toLocaleString()}}</p>
             </div>
         </div>
     </ion-card>
