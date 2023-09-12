@@ -37,10 +37,37 @@ export class FindPlantPage {
               private modalCtrl: ModalController,
               private configProvider: ConfigProvider,
               private authProvider: AuthProvider) {
-                //this.alberoProvider.getAllSorted();
   }
 
   ionViewDidLoad() {
+    let objectId = localStorage.getItem('objectId');
+    if (!!objectId) {
+      // Get the tree and set the session storage, go to the details of the tree
+      // if something goes wrong show the error message
+      this.alberoProvider.findByIdPianta(parseInt(objectId)).subscribe((albero: Albero) => {
+        // Setup the session storage
+        sessionStorage.setItem('albero', JSON.stringify(albero));
+        // Navigate to the next page
+        this.navCtrl.setRoot("AlberoDetailsPage", {albero: albero});
+      }, err => {
+        // error 404 can be reached only from logged user
+        if(err.status === 404) {
+          // sessionStorage.removeItem('albero');
+          sessionStorage.setItem('newIdPianta', JSON.stringify(objectId));
+          this.navCtrl.setRoot("FindPlantPage");
+          this.navCtrl.push("AlberoDetailsPage", {newIdPianta: objectId});
+        } else {
+          // save the object Id for further actions after login
+          sessionStorage.setItem('objectId', objectId);
+          const alert = this.alertCtrl.create({
+            message: "Il codice rilevato non è stato trovato nei nostri archivi",
+            buttons: [{text: "ok"}]
+          });
+          alert.present();
+        }
+      })
+      localStorage.removeItem('objectId');
+    }
   }
 
   /**
