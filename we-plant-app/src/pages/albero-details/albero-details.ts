@@ -450,7 +450,6 @@ export class AlberoDetailsPage {
   }
 
   inputChange(searchBar) {
-    console.log(searchBar);
     if (!!searchBar) {
       this.searching = true;
       this.albero.essenza = new Essenza();
