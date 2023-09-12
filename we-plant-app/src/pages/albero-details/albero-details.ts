@@ -165,6 +165,7 @@ export class AlberoDetailsPage {
         this.wkLonLat();
         this.initLat = !!this.lat ? this.lat : null;
         this.initLon = !!this.lon ? this.lon : null;
+        this.searchBar = albero.essenza.genereESpecie;
         if (!!this.lat && !!this.lon) {
           this.initWkt = `POINT (${this.lon} ${this.lat})`;
         }
@@ -449,6 +450,7 @@ export class AlberoDetailsPage {
   }
 
   inputChange(searchBar) {
+    console.log(searchBar);
     if (!!searchBar) {
       this.searching = true;
       this.albero.essenza = new Essenza();

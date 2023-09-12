@@ -25,12 +25,13 @@
     <ion-badge [color]="'danger'" *ngIf="albero.deleted">Albero eliminato</ion-badge>
   </div>
   <form *ngIf="!anonimusUser">
-    <ion-item *ngIf="!newAlbero">
+    <!-- <ion-item *ngIf="!newAlbero">
       <ion-label floating>Genere e specie</ion-label>
       <ion-input type="text" [(ngModel)]="albero.essenza.genereESpecie" name="genereESpecie"
-                 [readonly]="true"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="newAlbero">
+                [readonly]="anonimusUser"></ion-input>
+    </ion-item> -->
+    <!-- <ion-item *ngIf="newAlbero"> -->
+    <ion-item>
       <ion-label floating>Seleziona genere e specie</ion-label>
       <ion-input name="genereESpecieSelect" type="text"
                  [(ngModel)]="searchBar"
@@ -38,7 +39,8 @@
                  [readonly]="anonimusUser">
       </ion-input>
     </ion-item>
-    <div *ngIf="newAlbero && searching" class="plants">
+    <!-- <div *ngIf="newAlbero && searching" class="plants"> -->
+    <div *ngIf="searching" class="plants">
       <ion-list>
         <ion-item *ngFor="let essenza of essenzaSearchResult" (click)="selectedEssenza(essenza)">
           {{essenza.genereESpecie}}
