@@ -123,6 +123,7 @@ export class AlberoDetailsPage {
     let newIdPiantaJSON = sessionStorage.getItem('newIdPianta');
     let newIdPianta = !!newIdPiantaJSON ? JSON.parse(newIdPiantaJSON) : null;
     sessionStorage.removeItem('newIdPianta');
+    sessionStorage.removeItem('albero');
     
     this.toComplite = !!this.navParams.get("toComplite");
     this.platform.registerBackButtonAction(() => {

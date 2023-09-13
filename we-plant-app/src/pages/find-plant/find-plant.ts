@@ -73,8 +73,8 @@ export class FindPlantPage {
           alert.present();
         }
       })
-      localStorage.removeItem('objectId');
     }
+    localStorage.removeItem('objectId');
   }
 
   /**
