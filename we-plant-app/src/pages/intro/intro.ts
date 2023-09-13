@@ -87,7 +87,7 @@ export class IntroPage {
           } else {
             localStorage.setItem('objectId', this.objectId);
             const alert = this.alertCtrl.create({
-              message: "Il codice rilevato non è stato trovato nei nostri archivi",
+              message: "Errore! Per visualizzare l'albero è necessario autenticarsi",
               buttons: [{text: "ok"}]
             });
             alert.present();
@@ -98,7 +98,7 @@ export class IntroPage {
     //
     // Stop the loader
     loader.dismiss();
-    console.log(this.objectId);
+    // console.log(this.objectId);
   }
 
   ionViewDidEnter() {

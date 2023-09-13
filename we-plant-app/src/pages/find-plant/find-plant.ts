@@ -53,14 +53,21 @@ export class FindPlantPage {
         // error 404 can be reached only from logged user
         if(err.status === 404) {
           // sessionStorage.removeItem('albero');
-          sessionStorage.setItem('newIdPianta', JSON.stringify(objectId));
-          this.navCtrl.setRoot("FindPlantPage");
-          this.navCtrl.push("AlberoDetailsPage", {newIdPianta: objectId});
+          let isAnonymous = this.authProvider.isAnonimusUser();
+          if(!isAnonymous) {
+            sessionStorage.setItem('newIdPianta', JSON.stringify(objectId));
+            this.navCtrl.setRoot("FindPlantPage");
+            this.navCtrl.push("AlberoDetailsPage", {newIdPianta: objectId});
+          } else {
+            const alert = this.alertCtrl.create({
+              message: "Albero non trovato negli archivi",
+              buttons: [{text: "ok"}]
+            });
+            alert.present();
+          }
         } else {
-          // save the object Id for further actions after login
-          sessionStorage.setItem('objectId', objectId);
           const alert = this.alertCtrl.create({
-            message: "Il codice rilevato non è stato trovato nei nostri archivi",
+            message: "Errore " + err.status + ": " + err.message,
             buttons: [{text: "ok"}]
           });
           alert.present();
