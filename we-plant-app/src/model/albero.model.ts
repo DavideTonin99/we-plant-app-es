@@ -22,7 +22,7 @@ export class Albero {
   dataPrimaRilevazione?: any;
   dataAbbattimento?: any;
   dataUltimoAggiornamento?: any;
-  formattedLastUpdate: string;
+  formattedLastUpdate?: string;
   noteTecniche?: any;
   essenza: Essenza;
   essenzaId: number;
