@@ -25,6 +25,12 @@ export class ListOfTreesComponent {
     ) {
         // Get all the trees
         this.alberoProvider.getAllTreesSortedByLastUpdate().subscribe((trees: Array<Albero>) => {
+            for (let tree of trees) {
+                let tempLastUpdateDate = new Date(tree.dataUltimoAggiornamento);
+                tree.formattedLastUpdate = tempLastUpdateDate.toLocaleString();
+                //
+                this.treeList.push(tree);
+            }
             this.treeList = trees;
         }, err => {
             console.error(err);
