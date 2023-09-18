@@ -10,6 +10,7 @@ export interface IJhUserModel {
   langKey?: string;
   lastModifiedBy?: string;
   lastModifiedDate?: Date;
+  modifiedCounter?: number;
   lastName?: string;
   login?: string;
 
@@ -26,6 +27,7 @@ export class JhUserModel implements IJhUserModel {
       public langKey?: string,
       public lastModifiedBy?: string,
       public lastModifiedDate?: Date,
+      public modifiedCounter?: number,
       public lastName?: string,
       public login?: string,
     ) {}

@@ -322,7 +322,30 @@ export class AlberoDetailsPage {
 
   loadUsersCredits(){
     this.alberoProvider.getUsersByIdPianta(this.albero.idPianta).subscribe(res =>{
-      this.usersList = res;
+      // Copy of the result array
+      let copyResult = res;
+      //
+      // For each user in the result find and add the user, or update the counter
+      for (let user of copyResult) {
+        // Variable to check if the user was found
+        let userFound = false;
+        //
+        // Check if the user is already in the final array
+        // if it's in -> update the counter
+        for (let uniqueUsers of this.usersList) {
+          if (uniqueUsers.id === user.id && !userFound) {
+            uniqueUsers.modifiedCounter++;
+            userFound = true;
+          }
+        }
+        //
+        // If the user wasn't found in the final array
+        // set the counter at 1 and add the user
+        if (!userFound) {
+          user.modifiedCounter = 1;
+          this.usersList.push(user)
+        }
+      }
     })
   }
 
