@@ -33,13 +33,13 @@
                  [readonly]="anonimusUser">
       </ion-input>
     </ion-item>
-    <div *ngIf="searching" class="plants">
+    <ion-content *ngIf="searching" class="plants">
       <ion-list>
         <ion-item *ngFor="let essenza of essenzaSearchResult" (click)="selectedEssenza(essenza)">
           {{essenza.genereESpecie}}
         </ion-item>
       </ion-list>
-    </div>
+    </ion-content>
     <ion-item>
       <ion-label floating>Nome comune</ion-label>
       <ion-input type="text" [(ngModel)]="albero.essenza.nomeComune" name="nomeComune"
