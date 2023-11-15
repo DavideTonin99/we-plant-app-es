@@ -24,12 +24,13 @@ import {ElasticlunrProvider} from "../../providers/elasticlunr/elasticlunr";
 import {ComuneProvider} from "../../providers/comune/comune";
 import {AlberoVisit} from "../../model/albero-visit.model";
 import {AuthProvider} from "../../providers/auth/auth";
-import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
+// import {PositionSelectorComponent} from "../../components/position-selector/position-selector";
 import {ILatLng} from "@ionic-native/google-maps";
 import {QrScannerComponent} from "../../components/qr-scanner/qr-scanner";
 import {PhotoModalComponent} from "../../components/photo-modal/photo-modal";
-import {Observable} from "rxjs/Observable";
+// import {Observable} from "rxjs/Observable";
 import {forkJoin} from "rxjs/observable/forkJoin";
+import { JhUserModel } from '../../model/jhUser-model';
 
 declare var navigator: any;
 
@@ -47,7 +48,7 @@ declare var navigator: any;
 })
 export class AlberoDetailsPage {
 
-  display = 'block'
+  display = 'block';
   albero: Albero;
   clearDataImpianto: any = {
     buttons: [{
@@ -89,6 +90,7 @@ export class AlberoDetailsPage {
   anonimusUser = false;
   isCurrentUserAdmin;
   currentUser;
+  usersList : Array<JhUserModel> = [];
   private essenzaSearchResult: Array<Essenza> = [];
   private modal: Modal;
 
@@ -111,12 +113,18 @@ export class AlberoDetailsPage {
               public toastCtrl: ToastController,
               public authProvider: AuthProvider,
               public platform: Platform) {
-
-
+    
     this.anonimusUser = this.authProvider.isAnonimusUser();
     this.isCurrentUserAdmin = this.authProvider.isCurrentUserAdmin();
+    // get albero object
     let alberoJSON = sessionStorage.getItem('albero');
     let albero = !!alberoJSON ? JSON.parse(alberoJSON) : null;
+    // get newIdPianta
+    let newIdPiantaJSON = sessionStorage.getItem('newIdPianta');
+    let newIdPianta = !!newIdPiantaJSON ? JSON.parse(newIdPiantaJSON) : null;
+    sessionStorage.removeItem('newIdPianta');
+    sessionStorage.removeItem('albero');
+    
     this.toComplite = !!this.navParams.get("toComplite");
     this.platform.registerBackButtonAction(() => {
       if (!!this.modal) {
@@ -134,20 +142,31 @@ export class AlberoDetailsPage {
       this.albero = new Albero();
       this.initLat = !!this.lat ? this.lat : null;
       this.initLon = !!this.lon ? this.lon : null;
+
+      this.albero.diametro = 0;
+      this.calculateCircumference();
+
       this.albero.dataPrimaRilevazione = this.albero.dataPrimaRilevazione = datePipe.transform(new Date(), 'yyyy-MM-dd');
+      if(!!newIdPianta) {
+        this.albero.idPianta = newIdPianta;
+      }
     } else {
       this.albero = new Albero();
+
       let loader = this.loadingCtrl.create();
       loader.present();
 
       this.alberoProvider.find(albero.id).subscribe(res => {
         loader.dismiss();
         this.albero = res;
+        this.calculateCircumference();
         this.loadImages();
+        this.loadUsersCredits();
         this.dataUltimoAggiornamento = datePipe.transform(this.albero.dataUltimoAggiornamento, 'dd-MM-yyyy HH:mm');
         this.wkLonLat();
         this.initLat = !!this.lat ? this.lat : null;
         this.initLon = !!this.lon ? this.lon : null;
+        this.searchBar = albero.essenza.genereESpecie;
         if (!!this.lat && !!this.lon) {
           this.initWkt = `POINT (${this.lon} ${this.lat})`;
         }
@@ -186,7 +205,7 @@ export class AlberoDetailsPage {
       })
     }
 
-    console.log(this.albero);
+    // console.log(this.albero);
   }
 
   ionViewDidLoad() {
@@ -197,8 +216,17 @@ export class AlberoDetailsPage {
     this.clearData();
   }
 
+
+  calculateDiameter() {
+    this.albero.diametro = this.albero.circonferenza / Math.PI;
+  }
+
+  calculateCircumference() {
+    this.albero.circonferenza = this.albero.diametro * Math.PI;
+  }
+
   checkAndSave() {
-    console.log(this.albero)
+    // console.log(this.albero)
     if (this.toComplite) {
       if (!this.albero.idPianta) {
         this.alertCtrl.create({message: "codice albero non inserita!", buttons: [{text: "ok"}]}).present();
@@ -243,8 +271,9 @@ export class AlberoDetailsPage {
     let modal = this.modalCtrl.create(PhotoModalComponent, {modal: this})
     modal.present();
     modal.onDidDismiss((data) => {
-      console.log(data);
-      this.processPicture(data.imageAsDataUrl);
+      if(data !== null){
+        this.processPicture(data.imageAsDataUrl);
+      }
     });
     /*
     this.alertCtrl.create({
@@ -282,12 +311,41 @@ export class AlberoDetailsPage {
 
   loadImages() {
     this.albero.images.forEach(res => {
-      console.log(res);
+      // console.log(res);
       let image = new ImageModel(`${this.configProvider.serverUrl}/api/custom/images/path/${res.id}`);
       image.thumbnailUrl = `${this.configProvider.serverUrl}/api/custom/images/path/thumbnail/${res.id}`;
       image.id = res.id;
       image.cratedById = res.cratedById;
       this.images.push(image);
+    })
+  }
+
+  loadUsersCredits(){
+    this.alberoProvider.getUsersByIdPianta(this.albero.idPianta).subscribe(res =>{
+      // Copy of the result array
+      let copyResult = res;
+      //
+      // For each user in the result find and add the user, or update the counter
+      for (let user of copyResult) {
+        // Variable to check if the user was found
+        let userFound = false;
+        //
+        // Check if the user is already in the final array
+        // if it's in -> update the counter
+        for (let uniqueUsers of this.usersList) {
+          if (uniqueUsers.id === user.id && !userFound) {
+            uniqueUsers.modifiedCounter++;
+            userFound = true;
+          }
+        }
+        //
+        // If the user wasn't found in the final array
+        // set the counter at 1 and add the user
+        if (!userFound) {
+          user.modifiedCounter = 1;
+          this.usersList.push(user)
+        }
+      }
     })
   }
 
@@ -324,8 +382,8 @@ export class AlberoDetailsPage {
 
   mapPositionCallbackFunction = (res: ILatLng) => {
     return new Promise((resolve, reject) => {
-      console.log('myCallbackFunction');
-      console.log(res);
+      // console.log('myCallbackFunction');
+      // console.log(res);
       if (!!res && !!res.lng && !!res.lat) {
         this.lat = res.lat
         this.lon = res.lng
@@ -348,8 +406,8 @@ export class AlberoDetailsPage {
     loader.present();
 
     navigator.geolocation.getCurrentPosition((success) => {
-      console.log(success.coords.latitude)
-      console.log(success.coords.longitude)
+      // console.log(success.coords.latitude)
+      // console.log(success.coords.longitude)
       this.lon = success.coords.longitude;
       this.lat = success.coords.latitude;
       this.albero.wkt = `POINT (${this.lon} ${this.lat})`
@@ -429,17 +487,17 @@ export class AlberoDetailsPage {
       this.searching = false;
       this.essenzaSearchResult = [];
     }
-    console.log(searchBar);
+    // console.log(searchBar);
   };
 
   onSearchBlur() {
-    setTimeout(() => {
-      this.searching = false;
-    }, 0)
+     setTimeout(() => {
+       this.searching = false;
+     }, 150)
   }
 
   selectedEssenza(essenza: Essenza) {
-    console.log(essenza);
+    // console.log(essenza);
     let loader = this.loadingCtrl.create();
     loader.present();
     this.alberoProvider.getEssenzaAudit(essenza.id).subscribe(res => {
@@ -516,9 +574,7 @@ export class AlberoDetailsPage {
         headers: {Authorization: localStorage.getItem("user-token")}
       };
       let imageUpload$ = [];
-      if (!this.images || !this.images.length) {
-        loader.dismiss();
-      }
+      // images section
       this.images.forEach(image => {
         if (!image.id) {
           options.params.imageName = image.name;
@@ -528,38 +584,38 @@ export class AlberoDetailsPage {
           //imageUploadPromise.push(this.fileTransfer.upload(image.url, `${this.configProvider.serverUrl}/api/custom/images/upload`, options));
         }
       })
+      let imageLength = imageUpload$.length;
       forkJoin(imageUpload$).subscribe(res => {
         if (!!this.albero.idPianta) {
           this.alberoProvider.findByIdPianta(this.albero.idPianta).subscribe(res => {
             this.clearData();
-            loader.dismiss();
             this.albero = res;
             this.loadImages();
             this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
           }, err => {
-            loader.dismiss();
             this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
           })
         } else {
-          loader.dismiss();
           this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
         }
       }, err => {
-        console.log(err);
-        loader.dismiss();
         this.clearData();
         this.alertCtrl.create({
           message: "Errore durante il salvataggio dei dati. Riprovare più tardi.",
           buttons: [{text: "Ok"}]
         }).present();
       })
+      
+      if(imageLength <= 0) {
+        this.alertCtrl.create({message: "Salvataggio riuscito con successo", buttons: [{text: "Ok"}]}).present();
+      }
     }, err => {
-      loader.dismiss();
       this.alertCtrl.create({
         message: "Errore durante il salvataggio dei dati. Riprovare più tardi.",
         buttons: [{text: "Ok"}]
       }).present();
     })
+    loader.dismiss();
   }
 
   private wkLonLat() {

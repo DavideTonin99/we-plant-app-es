@@ -86,17 +86,14 @@ export class LoginPage {
             localStorage.removeItem('user');//remove revious anonymous user
             user.id = jhUserModel.id;
             this.pouchdbProvider.create('user', user);
-            let toast = this.toastCtrl.create({
-              message: this.translateService.instant('LOGIN.SUCCESS'),
-              duration: 3000,
-              position: 'bottom',
-              showCloseButton: true,
-              closeButtonText: "Ok"
-            });
-            toast.present();
-            toast.onDidDismiss(() => {
-              this.navCtrl.setRoot("FindPlantPage");
-            });
+            this.navCtrl.setRoot("FindPlantPage");
+
+            var alert = this.alertCtrl.create({message: "Autenticazione avvenuta con successo"});
+            alert.present();
+            setTimeout(function(){
+              alert.dismiss();
+            }, 1200);
+
             this.authProvider.isLoggedIn = true;
           }, err => {
             this.onLoginError(err);

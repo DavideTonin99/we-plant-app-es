@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {
   AlertController,
-  IonicPage, LoadingController, MenuController, NavController, NavParams, Platform,
-  ToastController
+  IonicPage, LoadingController, MenuController, NavController, NavParams, ToastController
 } from 'ionic-angular';
 import {User} from "../../model/user.model";
 import {AuthProvider} from "../../providers/auth/auth";
@@ -52,30 +51,54 @@ export class IntroPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IntroPage');
+    // Set up the loader
+    let loader = this.loaderCtrl.create();
+    loader.present();
+    //
+    // Setup the user and go to the tree page if it exists
     try {
+      // Get the tree's id from the URL
       this.objectId = location.href.split("?")[1].split("=")[1];
-
+      // If there is and ID for the tree get the tree
       if (!!this.objectId) {
-        let loader = this.loaderCtrl.create();
-        loader.present();
+        // Get the tree and set the session storage, go to the details of the tree
+        // if something goes wrong show the error message
         this.alberoProvider.findByIdPianta(this.objectId).subscribe((albero: Albero) => {
+          // Setup the session storage
           sessionStorage.setItem('albero', JSON.stringify(albero));
+          // Navigate to the next page
           this.navCtrl.setRoot("AlberoDetailsPage", {albero: albero});
-          loader.dismiss();
         }, err => {
-          loader.dismiss();
-          const alert = this.alertCtrl.create({
-            message: "Il codice rilevato non è stato trovato nei nostri archivi",
-            buttons: [{text: "ok"}]
-          });
-          alert.present();
+          if(err.status === 404) {
+            // To let user create a new tree he must be logged in
+            let isAnonymous = this.authProvider.isAnonimusUser();
+            if(isAnonymous) {
+              const alert = this.alertCtrl.create({
+                message: "Codice non trovato! Per creare un nuovo albero è necessario autenticarsi.",
+                buttons: [{text: "ok"}]
+              });
+              alert.present();
+            } else {
+            // sessionStorage.removeItem('albero');
+            sessionStorage.setItem('newIdPianta', JSON.stringify(this.objectId));
+            this.navCtrl.setRoot("FindPlantPage");
+            this.navCtrl.push("AlberoDetailsPage", {newIdPianta: this.objectId});
+          }
+          } else {
+            localStorage.setItem('objectId', this.objectId);
+            const alert = this.alertCtrl.create({
+              message: "Errore! Per visualizzare l'albero è necessario autenticarsi",
+              buttons: [{text: "ok"}]
+            });
+            alert.present();
+          }
         })
       }
-
-    } catch (e) {
-    }
-    console.log(this.objectId);
+    } catch (e) {}
+    //
+    // Stop the loader
+    loader.dismiss();
+    // console.log(this.objectId);
   }
 
   ionViewDidEnter() {
